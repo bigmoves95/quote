@@ -117,6 +117,11 @@ button.sec{border-radius:14px;padding:13px}
 .ins-list li{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:14px;background:var(--bg);border-left:4px solid var(--ok)}
 .ins-list span{color:var(--mute);font-size:15px}
 .card details:first-of-type{border-top:0}
+.trust-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.trust-row .rate{margin:0}
+.tpill{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);box-shadow:0 1px 2px rgba(20,32,43,.05),0 6px 16px -10px rgba(20,32,43,.25);color:var(--ink);font-weight:600;font-size:14.5px;line-height:1.2;white-space:nowrap}
+.tpill svg{width:17px;height:17px;flex:none}
+
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--card) 92%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);box-shadow:0 -10px 30px -14px rgba(20,32,43,.35);transform:translateY(110%);transition:transform .3s ease}
 .dock.show{transform:none}
 .dock .btn{flex:1;height:48px;font-size:16px}
@@ -157,7 +162,11 @@ html{scroll-behavior:smooth}
 <div class="brand" id="brand"></div>
 <h1>Get your removals quote in 30 seconds</h1>
 <p class="sub">Tell us about the move and get a price range straight away. No callback needed.</p>
-<a class="rate" id="rate" href="#reviews" hidden><span class="rate-star" aria-hidden="true">★★★★★</span><span id="rateTxt"></span><span aria-hidden="true">→</span></a>
+<div class="trust-row">
+  <a class="rate" id="rate" href="#reviews" hidden><span class="rate-star" aria-hidden="true">★★★★★</span><span id="rateTxt"></span><span aria-hidden="true">→</span></a>
+  <span class="tpill"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--ok)"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1.2 13.2l5.4-5.4-1.4-1.4-4 4-1.8-1.8-1.4 1.4 3.2 3.2z"/></svg>Fully insured</span>
+  <span class="tpill"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--kraft-d)"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.2 14.6L6.6 12.4l1.4-1.4 2.8 2.8 5.6-5.6 1.4 1.4-7 7z"/></svg>Price-match guarantee</span>
+</div>
 <div id="gallery"></div>
 
 <div class="card">
