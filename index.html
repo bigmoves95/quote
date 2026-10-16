@@ -192,7 +192,7 @@ html{scroll-behavior:smooth}
 .trust-row .rate{grid-column:1/-1}
 .trust-row .rate .rate-star{font-size:12px;letter-spacing:1px}
 .trust-row .tpill svg{width:14px;height:14px}
-@media (max-width:400px){.trust-row .tpill,.reach a{font-size:12.5px;padding:7px 5px;gap:5px}}
+@media (max-width:400px){.reach a{font-size:12.5px;padding:7px 5px;gap:5px}}
 .reach svg{width:13px;height:13px}
 @media (min-width:720px){.trust-row,.reach{grid-template-columns:1fr 1fr 1.3fr!important}.trust-row .rate{grid-column:auto}.reach a:last-child{grid-column:auto}}
 .biz{display:flex;flex-direction:column;gap:10px;margin:0 0 18px;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:0 1px 2px rgba(20,32,43,.05)}
@@ -260,6 +260,47 @@ a.tpill:active{transform:scale(.97)}
 .reply svg{width:15px;height:15px;flex:none;fill:var(--ok)}
 .reply span{color:var(--mute);font-weight:400}
 @media (min-width:720px){.reach{grid-template-columns:1fr!important}}
+@media (max-width:719px){.trust-row{grid-template-columns:1fr 1fr!important}.trust-row .rate{grid-column:1/-1}.trust-row .tpill{grid-column:auto;padding:9px 6px;font-size:13px;gap:6px}}
+@media (max-width:420px){.trust-row .tpill{font-size:12.5px}.trust-row .tpill svg{display:none}}
+@media (max-width:350px){.trust-row .tpill{font-size:11.5px}}
+@media (min-width:720px){.trust-row{grid-template-columns:1fr 1fr 1fr!important}.trust-row .rate{grid-column:auto}}
+@media (max-width:719px){.reach a{padding:9px 14px!important;font-size:13.5px!important;gap:8px!important}.reach svg{width:15px;height:15px}}
+.trust-row .rate,.trust-row .tpill,.reach a{min-height:38px;box-sizing:border-box}
+body.dock-pad main{padding-bottom:16px!important}
+.foot{padding-bottom:100px!important}
+.fq-w{position:relative;flex:none;display:inline-flex}
+.fq-w[hidden]{display:none}
+.fq-w::before{content:"";position:absolute;inset:0;border-radius:12px;pointer-events:none;animation:fqRing 2.1s ease-out infinite}
+@keyframes fqRing{0%{box-shadow:0 0 0 0 rgba(74,222,128,.7)}75%,100%{box-shadow:0 0 0 15px rgba(74,222,128,0)}}
+.fq-btn{position:relative;overflow:hidden}
+.fq-btn::after{content:"";position:absolute;top:-10%;bottom:-10%;left:-70%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-20deg);animation:fqSh 3.4s ease-in-out infinite;pointer-events:none}
+@keyframes fqSh{0%,55%{left:-70%}100%{left:130%}}
+.fq-btn svg{animation:fqNudge 1.4s ease-in-out infinite}
+@keyframes fqNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.fq-w::before,.fq-btn::after,.fq-btn svg{animation:none}}
+.fq-d{display:flex!important;align-items:center;gap:12px;margin-top:6px!important;height:22px;overflow:hidden;white-space:nowrap;color:rgba(255,255,255,.94)!important;font-size:inherit}
+.fq-d .g{display:flex;align-items:center;flex:none}
+.fq-d svg{height:20px;width:auto;display:block;fill:currentColor;flex:none}
+.fq-d .g svg + svg{margin-left:1px}
+.fq-d i{font-style:normal;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.72);margin-left:6px}
+.fq-d.pop svg{animation:fqPop .45s cubic-bezier(.3,1.6,.5,1) both}
+.fq-d.pop svg:nth-child(2){animation-delay:.06s}.fq-d.pop svg:nth-child(3){animation-delay:.12s}.fq-d.pop svg:nth-child(4){animation-delay:.18s}.fq-d.pop svg:nth-child(5){animation-delay:.24s}
+@keyframes fqPop{0%{opacity:0;transform:translateY(5px) scale(.5)}100%{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.fq-d.pop svg{animation:none}}
+.fq-d.tight{gap:9px}.fq-d.tight svg{height:17px}.fq-d.tight i{display:none}.fq-d.tight .g svg + svg{margin-left:-2px}
+.fq-d.tight .g svg.v + svg.v{margin-left:4px}
+.fq-d{height:18px!important;gap:9px!important;margin-top:7px!important;color:rgba(255,255,255,.9)!important}
+.fq-d svg{height:15px!important}
+.fq-d .g + .g{padding-left:9px;border-left:1px solid rgba(255,255,255,.18)}
+.fq-d i{font-size:10.5px;margin-left:5px;letter-spacing:.01em}
+.fq-d.tight{gap:7px!important}.fq-d.tight svg{height:13px!important}.fq-d.tight .g + .g{padding-left:7px}
+.fq-l{gap:8px!important;height:16px;align-items:center}
+.fq-l > span{flex:none}
+.fq-l .fq-d{margin:0 0 0 1px!important;height:16px!important;padding-left:9px;border-left:1px solid rgba(255,255,255,.2);letter-spacing:0;text-transform:none;gap:8px!important}
+.fq-l .fq-d svg{height:14px!important}
+.fq-l .fq-d.tight svg{height:12px!important}
+.fq-l .fq-d .g + .g{padding-left:8px}
+@media (max-width:360px){.fq-l .fq-d i{display:none}}
 </style>
 </head>
 <body>
@@ -370,8 +411,8 @@ a.tpill:active{transform:scale(.97)}
 </div>
 <div class="fq off" id="fq" aria-live="polite">
   <div class="fq-in" id="fqIn">
-    <div class="fq-t"><div class="fq-l">Live estimate</div><div class="fq-p" id="fqP">–</div><div class="fq-d" id="fqD"></div></div>
-    <button class="fq-btn" id="fqB" type="button">Lock it in<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <div class="fq-t"><div class="fq-l"><span>Live</span><div class="fq-d" id="fqD"></div></div><div class="fq-p" id="fqP">–</div></div>
+    <span class="fq-w" id="fqW"><button class="fq-btn" id="fqB" type="button">Lock it in<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></span>
   </div>
 </div>
 <footer class="foot">
@@ -735,9 +776,32 @@ $("send").addEventListener("click", async () => {
     let n = 0;
     parts.forEach(c => { if (/\d/.test(c)){ const col = cols[n++]; requestAnimationFrame(() => { col.style.transform = "translateY(" + (-1.1 * +c) + "em)"; }); } });
   }
+  const DK = "#1a3680";
+  const houseSvg = n => {
+    const w = k => `<rect x="${k[0]}" y="${k[1]}" width="${k[2]||3.4}" height="${k[3]||3.4}" rx=".6" fill="${DK}"/>`;
+    let b = "";
+    if (n <= 1) b = `<path d="M5 12L15 4l10 8z"/><rect x="8" y="12" width="14" height="10"/>` + w([11,15]) + `<rect x="17" y="16.5" width="3.2" height="5.5" rx=".6" fill="${DK}"/>`;
+    else if (n <= 3) b = `<path d="M2 11L15 3l13 8z"/><rect x="5" y="11" width="20" height="11"/>` + w([7.5,14]) + w([19,14]) + `<rect x="13.4" y="16" width="3.2" height="6" rx=".6" fill="${DK}"/>` + (n === 3 ? `<circle cx="15" cy="7.4" r="1.7" fill="${DK}"/>` : "");
+    else b = `<rect x="21.5" y="1.5" width="3.2" height="6"/><path d="M1 9L15 1l14 8z"/><rect x="3" y="9" width="24" height="13"/>` + w([6.5,11.5]) + w([20,11.5]) + w([6.5,16.5]) + w([20,16.5]) + (n >= 5 ? w([13.3,11.5]) : "") + `<rect x="13.4" y="16.5" width="3.2" height="5.5" rx=".6" fill="${DK}"/>`;
+    return `<svg viewBox="0 0 30 24" aria-hidden="true">${b}</svg>`;
+  };
+  const vanSvg = `<svg class="v" viewBox="0 0 32 20" aria-hidden="true"><rect x="1" y="3.5" width="21" height="11.5" rx="2"/><path d="M22 7h5l4 4.4V15H22z"/><path d="M24 8.6h2.6l2.2 2.6H24z" fill="${DK}"/><circle cx="8" cy="16" r="3.2" fill="${DK}" stroke="#fff" stroke-width="1.5"/><circle cx="25" cy="16" r="3.2" fill="${DK}" stroke="#fff" stroke-width="1.5"/></svg>`;
+  const lad = `<svg viewBox="0 0 26 24" aria-hidden="true"><circle cx="13" cy="4" r="3.2"/><path d="M6 9.5Q13 7 20 9.5L18.2 22H7.8z"/><circle cx="3.9" cy="11.2" r="2.7"/><circle cx="22.1" cy="11.2" r="2.7"/><circle cx="3" cy="5.4" r="2"/><circle cx="23" cy="5.4" r="2"/><path d="M6.5 10.6L3.2 11.4L3 6M19.5 10.6L22.8 11.4L23 6" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  let dsig = "";
+  function barIcons(q){
+    const vans = parseInt(q.van, 10) || 1, crew = q.crew || 2;
+    const beds = q.mv ? -1 : (/^Studio/.test(q.size) ? 0 : parseInt(q.size, 10) || 2);
+    const sig = beds + "|" + vans + "|" + crew + "|" + (q.mv ? q.hrs : "");
+    D.setAttribute("aria-label", q.mv ? "2 lads and a van, " + q.hrs + " hours" : q.size + ", " + q.van + ", " + crew + " movers, about " + q.dur + " hours");
+    if (sig === dsig) return; dsig = sig;
+    const g = (inner, label) => `<span class="g">${inner}${label ? "<i>" + label + "</i>" : ""}</span>`;
+    D.innerHTML = (beds >= 0 ? g(houseSvg(beds), q.size) : "") + g(vanSvg.repeat(vans)) + g(lad.repeat(crew), q.mv ? q.hrs + "h" : "");
+    D.classList.toggle("tight", vans > 1 || crew > 3);
+    D.classList.remove("pop"); void D.offsetWidth; D.classList.add("pop");
+  }
   function update(){
     const q = current; if (!q || q.lo == null) return;
-    D.textContent = q.mv ? "2 lads + van · " + q.hrs + " hours" : q.size + " · " + q.van + " · " + q.crew + " movers · ~" + q.dur + "h";
+    barIcons(q);
     roll(q.lo === q.hi ? fmt(q.lo) : fmt(q.lo) + " – " + fmt(q.hi));
   }
   new MutationObserver(update).observe($("price"), {childList:true, characterData:true, subtree:true});
@@ -757,7 +821,7 @@ $("send").addEventListener("click", async () => {
   new MutationObserver(() => { $("sMsg").innerHTML = $("msg").innerHTML; }).observe($("msg"), {childList:true, characterData:true, subtree:true});
   if (typeof digits !== "undefined" && digits){ $("sWa").addEventListener("click", e => { e.preventDefault(); $("name").value = $("sName").value; $("waSend").click(); }); } else { $("sWa").hidden = true; }
   if ("IntersectionObserver" in window){
-    new IntersectionObserver(es => { $("fqB").hidden = es[0].isIntersecting; }, {threshold:0.25}).observe($("lead"));
+    new IntersectionObserver(es => { $("fqW").hidden = es[0].isIntersecting; }, {threshold:0.25}).observe($("lead"));
   }
   document.addEventListener("focusin", e => { if (sheetOpen) return; const t = e.target; if (t.tagName === "TEXTAREA" || (t.tagName === "INPUT" && !/^(checkbox|radio|button|submit)$/.test(t.type))) fq.classList.add("hide"); });
   document.addEventListener("focusout", () => fq.classList.remove("hide"));
