@@ -61,19 +61,15 @@ textarea:focus-visible{outline:3px solid var(--kraft);outline-offset:2px}
 .frame{position:relative}
 .arr{display:none;position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;padding:0;border-radius:50%;background:rgba(255,255,255,.92);color:#14202B;font-size:24px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .arr.prev{left:8px}.arr.next{right:8px}
-.arr{display:block}
+.arr{display:block;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,.18);transition:background .2s,transform .2s}
+.arr:hover{background:#fff}.arr:active{transform:translateY(-50%) scale(.92)}
 @media (hover:none){.arr{width:32px;height:32px;font-size:21px;background:rgba(255,255,255,.88)}}
 .track{position:relative;display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:2px 0 8px;-webkit-overflow-scrolling:touch}
 .track::-webkit-scrollbar{display:none}
-.slide{flex:0 0 86%;margin:0;scroll-snap-align:start}
+.slide{flex:0 0 86%;margin:0;scroll-snap-align:start;opacity:.55;transform:scale(.95);transition:opacity .45s,transform .45s}
+.slide.on,.slide:only-child{opacity:1;transform:none}
 .slide:only-child{flex-basis:100%}
-.slide img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:18px;box-shadow:0 8px 22px rgba(0,0,0,.2)}
-.thumbs{position:relative;display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:10px 18px 12px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-.thumbs::-webkit-scrollbar{display:none}
-.th{flex:0 0 76px;width:76px;height:56px;padding:0;border:0;border-radius:13px;overflow:hidden;background:none;opacity:.5;filter:saturate(.7);transition:opacity .3s,transform .3s,box-shadow .3s,filter .3s}
-.th img{display:block;width:100%;height:100%;object-fit:cover}
-.th:hover{opacity:.9;filter:none}
-.th.on{opacity:1;filter:none;transform:scale(1.1);box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--kraft-d),0 6px 14px rgba(0,0,0,.25)}
+.slide img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:20px;box-shadow:0 10px 24px -8px rgba(0,0,0,.35)}
 .rev{margin:0 0 12px}.rev p{margin:0}
 details{border-top:1px solid var(--line);padding:10px 0}
 summary{cursor:pointer;font-weight:600}
@@ -335,6 +331,14 @@ body.dock-pad main{padding-bottom:16px!important}
 @keyframes thxp{from{opacity:0;transform:scale(.88) translateY(12px)}to{opacity:1;transform:none}}
 @keyframes thxd{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.thx,.thx-back.on,.thx-tick svg{animation:none}.thx-tick svg{stroke-dashoffset:0}}
+
+.thumbs{display:flex;justify-content:center;align-items:center;gap:7px;padding:8px 0 4px}
+.th{position:relative;flex:none;width:8px;height:8px;padding:0;border:0;border-radius:99px;background:var(--line);overflow:hidden;cursor:pointer;transition:width .35s cubic-bezier(.3,1.2,.4,1),background .3s}
+.th::before{content:"";position:absolute;inset:-10px -3px}
+.th.on{width:30px;background:var(--kraft-d)}
+.slider.run .th.on{background:var(--line)}
+.slider.run .th.on::after{content:"";position:absolute;inset:0;background:var(--kraft-d);border-radius:inherit;transform-origin:left;animation:thfill 3s linear forwards}
+@keyframes thfill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 </style>
 </head>
 <body>
@@ -627,11 +631,13 @@ if (digits){
     let cur = 0, timer = null;
     tr.tabIndex = 0; tr.setAttribute("aria-label", "Photos of our work");
     const go = k => tr.scrollTo({left: tr.children[(k + n) % n].offsetLeft, behavior: "smooth"});
-    const stop = () => { if (timer){ clearInterval(timer); timer = null; } };
+    const arm = () => { clearTimeout(timer); timer = setTimeout(() => go(cur + 1), 3000); sl.classList.add("run"); };
+    const stop = () => { if (auto) arm(); };
+    let auto = false;
     CONFIG.photos.forEach((u, k) => {
       const f = mk("figure", "slide"), i = mk("img");
       i.src = u; i.alt = CONFIG.business + " van and crew"; f.append(i); tr.append(f);
-      const d = mk("button", "th"), ti = mk("img"); d.type = "button"; d.setAttribute("aria-label", "Photo " + (k + 1)); ti.src = u; ti.alt = ""; d.append(ti);
+      const d = mk("button", "th"); d.type = "button"; d.setAttribute("aria-label", "Photo " + (k + 1));
       d.onclick = () => { stop(); go(k); }; dots.append(d);
     });
     tr.addEventListener("scroll", () => {
@@ -639,11 +645,10 @@ if (digits){
       let k = 0, best = 1e9;
       [...tr.children].forEach((el, j) => { const dist = Math.abs(el.offsetLeft - tr.scrollLeft); if (dist < best){ best = dist; k = j; } });
       if (atEnd) k = n - 1;
-      cur = k; [...dots.children].forEach((d, j) => d.classList.toggle("on", j === k));
-      const t = dots.children[k]; dots.scrollTo({left: t.offsetLeft - (dots.clientWidth - t.offsetWidth) / 2, behavior: "smooth"});
+      if (k !== cur || !tr._init){ tr._init = 1; cur = k; [...dots.children].forEach((d, j) => d.classList.toggle("on", j === k)); [...tr.children].forEach((f, j) => f.classList.toggle("on", j === k)); if (auto) arm(); }
     });
     ["pointerdown", "touchstart", "keydown", "wheel"].forEach(ev => tr.addEventListener(ev, stop, {passive: true}));
-    dots.firstChild.classList.add("on");
+    dots.firstChild.classList.add("on"); tr.firstChild.classList.add("on");
     frame.append(tr);
     if (n > 1){
       const arrow = (cls, label, txt, d) => { const b = mk("button", "arr " + cls, txt); b.type = "button"; b.setAttribute("aria-label", label); b.onclick = () => { stop(); go(cur + d); }; return b; };
@@ -652,7 +657,7 @@ if (digits){
     sl.append(frame);
     if (n > 1){
       sl.append(dots);
-      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) timer = setInterval(() => go(cur + 1), 4500);
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches){ auto = true; arm(); }
     }
     $("gallery").append(sl);
   }
