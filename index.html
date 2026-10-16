@@ -322,6 +322,19 @@ body.dock-pad main{padding-bottom:16px!important}
 .rate .gl{width:16px;height:16px;flex:none;display:block}
 @media (max-width:340px){.rate .gl{width:14px;height:14px}.trust-row .rate{gap:5px;font-size:12.5px}}
 @media (max-width:340px){#rate > span:last-child{display:none}}
+
+.thx-back{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(15,25,35,.55);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+.thx-back.on{display:flex;animation:thxf .25s ease}
+.thx{position:relative;width:100%;max-width:380px;background:var(--card);border-radius:24px;padding:30px 24px 24px;text-align:center;box-shadow:0 24px 60px -12px rgba(0,0,0,.45);animation:thxp .4s cubic-bezier(.2,1.3,.4,1)}
+.thx-tick{width:68px;height:68px;margin:0 auto 14px;border-radius:50%;background:var(--ok);display:grid;place-items:center}
+.thx-tick svg{width:36px;height:36px;fill:none;stroke:#fff;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;stroke-dashoffset:30;animation:thxd .5s .25s ease forwards}
+.thx h3{margin:0 0 8px;font-size:23px;letter-spacing:-.01em}
+.thx p{margin:0 0 18px;color:var(--mute);font-size:15.5px;line-height:1.45}
+.thx button{width:100%;border:0;border-radius:14px;padding:14px;font:inherit;font-weight:700;font-size:16px;color:#fff;background:var(--ok);cursor:pointer}
+@keyframes thxf{from{opacity:0}to{opacity:1}}
+@keyframes thxp{from{opacity:0;transform:scale(.88) translateY(12px)}to{opacity:1;transform:none}}
+@keyframes thxd{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion:reduce){.thx,.thx-back.on,.thx-tick svg{animation:none}.thx-tick svg{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
@@ -337,6 +350,7 @@ body.dock-pad main{padding-bottom:16px!important}
 <div class="reach">
   <a href="mailto:info@big-moves.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4.2l-8 5-8-5V6l8 5 8-5v2.2z"/></svg>info@big-moves.com</a>
 </div>
+<div class="thx-back" id="thxBack" role="dialog" aria-modal="true" aria-labelledby="thxT"><div class="thx"><div class="thx-tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3 id="thxT">Thank you!</h3><p>Your quote request is in. We'll be in touch shortly to confirm your price.</p><button type="button" id="thxClose">Done</button></div></div>
 <div id="gallery"></div>
 
 <div class="card">
@@ -752,22 +766,32 @@ $("geo").addEventListener("click", async () => {
 });
 calc();
 
+function showThanks(){
+  const b = $("thxBack"), c = $("thxClose"); b.classList.add("on"); c.focus();
+  const close = () => { b.classList.remove("on"); document.removeEventListener("keydown", esc); };
+  const esc = e => { if (e.key === "Escape") close(); };
+  c.onclick = close; b.onclick = e => { if (e.target === b) close(); }; document.addEventListener("keydown", esc);
+}
 $("send").addEventListener("click", async () => {
   const name = $("name").value.trim(), contact = $("contact").value.trim();
   if (!name || !contact){ $("msg").textContent = "Enter your name and phone number so we can reach you."; return; }
   if (!$("ok").checked){ $("msg").textContent = "Tick the box to confirm you're happy to be contacted."; return; }
   const q = current;
+  $("send").disabled = true; $("msg").textContent = "Sending...";
   const summary = "Quote request from " + name + " (" + contact + ")\n\n" + quoteLines().map(l => "• " + l).join("\n") + "\n\nCustomer agreed to be contacted.";
   if (CONFIG.formUrl){
     try{
       const r = await fetch(CONFIG.formUrl, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify({name, contact, summary})});
       if (!r.ok) throw 0;
       track();
-      $("msg").innerHTML = '<span class="done">Request sent. We\'ll be in touch shortly to confirm your price.</span>';
+      $("msg").innerHTML = '<span class="done">Request sent. Thank you!</span>';
+      showThanks();
     }catch(e){ $("msg").textContent = "Sending failed. Please try again or call us."; }
+    $("send").disabled = false;
   } else {
     track(); location.href = "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent("Quote request from " + name) + "&body=" + encodeURIComponent(summary);
     $("msg").innerHTML = '<span class="done">Your email app should open with the details filled in.</span>';
+    $("send").disabled = false;
   }
 });
 
