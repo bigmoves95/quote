@@ -446,12 +446,36 @@ $("brand").querySelector("img").src = CONFIG.logoUrl;
 $("brand").querySelector("img").alt = CONFIG.business;
 const digits = CONFIG.phone.replace(/[^\d+]/g, "");
 const intl = digits.startsWith("+") ? digits.slice(1) : digits.replace(/^0/, "44");
+function quoteLines(){
+  const q = current, L = [];
+  if (q.lo == null) return ["Quote request"];
+  const val = id => ($(id) && $(id).value ? $(id).value.trim() : "");
+  const opt = id => { const e = $(id); return e && e.selectedOptions && e.selectedOptions[0] ? e.selectedOptions[0].text : ""; };
+  if (q.mv){
+    L.push("Type: Man & van (2 lads and a van)");
+    L.push("Hours: " + q.hrs + " at £" + q.rate + "/hr");
+    L.push("Estimate: £" + q.lo);
+    return L;
+  }
+  L.push("Type: House move");
+  L.push("Property: " + opt("size"));
+  L.push("Furniture: " + q.load + (/Not sure/.test(q.load) ? " (happy to do a video survey or send pics)" : ""));
+  L.push("Collection: " + (val("pcA") || "postcode not given") + " (" + opt("from") + ")");
+  L.push("Delivery: " + (val("pcB") || "postcode not given") + " (" + opt("to") + ")");
+  L.push("Distance: about " + q.miles + " miles");
+  const ex = [];
+  if (q.packing) ex.push("Packing service");
+  if (q.dis) ex.push("Dismantle and rebuild furniture");
+  if (q.layout) ex.push("Set up to my layout");
+  L.push("Extras: " + (ex.length ? ex.join(", ") : "none"));
+  if (q.layout) L.push("Layout notes: " + (val("layText") || "to follow"));
+  if (q.weeks) L.push("Storage: " + q.weeks + (q.weeks > 1 ? " weeks" : " week") + " (£" + q.storage + ")");
+  L.push("Estimate: £" + q.lo.toLocaleString("en-GB") + " to £" + q.hi.toLocaleString("en-GB") + " (" + q.van + ", " + q.crew + " movers, about " + q.dur + " hours)");
+  return L;
+}
 function waLink(){
-  const q = current, nm = $("name") ? $("name").value.trim() : "";
-  let msg = "Hi " + CONFIG.business + (nm ? ", I'm " + nm : "") + ". I'd like a quote.";
-  if (q.mv) msg += " Man & van, " + q.hrs + " hours at £" + q.rate + "/hr, estimate £" + q.lo + ".";
-  else if (q.size) msg += " " + q.size + ", " + q.load + " load, about " + q.miles + " miles, estimate £" + q.lo + " to £" + q.hi + ".";
-  if (q.layout && $("layText") && $("layText").value.trim()) msg += " Layout: " + $("layText").value.trim();
+  const nm = $("name") ? $("name").value.trim() : "";
+  const msg = "Hi " + CONFIG.business + (nm ? ", I'm " + nm : "") + ". I'd like a quote:\n\n" + quoteLines().map(l => "• " + l).join("\n");
   return "https://wa.me/" + intl + "?text=" + encodeURIComponent(msg);
 }
 if (digits){
@@ -671,10 +695,7 @@ $("send").addEventListener("click", async () => {
   if (!name || !contact){ $("msg").textContent = "Enter your name and phone number so we can reach you."; return; }
   if (!$("ok").checked){ $("msg").textContent = "Tick the box to confirm you're happy to be contacted."; return; }
   const q = current;
-  const summary = q.mv ? `Quote request from ${name} (${contact}). MAN & VAN: 2 lads and a van, ${q.hrs} hours at £${q.rate}/hr = £${q.lo}. Customer agreed to be contacted.` : `Quote request from ${name} (${contact}). ` +
-    `${q.size}, furniture load: ${q.load}, ${$("pcA").value || "?"} to ${$("pcB").value || "?"} (${q.miles} miles), ${q.flights} flights of stairs in total, ` +
-    `packing: ${q.packing ? "yes" : "no"}, dismantle: ${q.dis ? "yes" : "no"}, storage: ${q.weeks ? q.weeks + " weeks" : "no"}. ` +
-    `Estimate £${q.lo}-£${q.hi} (${q.van}, ${q.crew} movers, ~${q.dur}h). ${q.layout ? "Set up to customer layout: yes. Notes: " + ($("layText").value.trim() || "to follow") + ". " : ""}Customer agreed to be contacted.`;
+  const summary = "Quote request from " + name + " (" + contact + ")\n\n" + quoteLines().map(l => "• " + l).join("\n") + "\n\nCustomer agreed to be contacted.";
   if (CONFIG.formUrl){
     try{
       const r = await fetch(CONFIG.formUrl, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify({name, contact, summary})});
