@@ -339,13 +339,83 @@ body.dock-pad main{padding-bottom:16px!important}
 .slider.run .th.on{background:var(--line)}
 .slider.run .th.on::after{content:"";position:absolute;inset:0;background:var(--kraft-d);border-radius:inherit;transform-origin:left;animation:thfill 3s linear forwards}
 @keyframes thfill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ---- primary CTA ---- */
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;padding:16px 20px;border-radius:16px;background:linear-gradient(135deg,#22A35A,#15723D);color:#fff;font-weight:800;font-size:19px;letter-spacing:-.01em;text-decoration:none;box-shadow:none;transition:transform .15s,filter .2s}
+.cta svg{width:22px;height:22px;fill:currentColor;flex:none;transition:transform .2s}
+.cta:hover{filter:brightness(1.06)}.cta:hover svg{transform:translateX(3px)}
+.cta:active{transform:scale(.985)}
+.cta:focus-visible{outline:3px solid var(--kraft);outline-offset:3px}
+.cta-note{display:flex;justify-content:center;flex-wrap:wrap;gap:4px 14px;margin:10px 0 20px;font-size:14px;font-weight:600;color:var(--mute);list-style:none;padding:0}
+.cta-note li{display:flex;align-items:center;gap:5px}
+.cta-note svg{width:14px;height:14px;fill:var(--ok);flex:none}
+#quote{scroll-margin-top:14px}
+#quote.flash{animation:qflash 1.4s ease}
+@keyframes qflash{0%,100%{box-shadow:0 1px 2px rgba(20,32,43,.05),0 10px 30px -12px rgba(20,32,43,.18)}30%{box-shadow:0 0 0 4px rgba(34,163,90,.45),0 10px 30px -12px rgba(20,32,43,.18)}}
+@media (prefers-reduced-motion:reduce){#quote.flash{animation:none}}
+/* contact buttons become secondary */
+.brand .contact .btn{height:38px;font-size:14px;padding:0 14px;background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.brand .contact .btn.call svg{fill:var(--kraft-d)}
+.brand .contact .btn.wa svg{fill:#1FA855}
+.sub{margin-bottom:16px}
+
+/* ---- invite: gloss + live ring + hint chip ---- */
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+.gw{display:block;position:relative;border-radius:12px}
+.inv{position:relative;border-radius:12px}
+.inv::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;
+ background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.08) 40%,rgba(255,255,255,.62) 49%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.25) 56%,transparent 66%) no-repeat;
+ background-size:280% 100%;background-position:170% 0;opacity:0;mix-blend-mode:overlay}
+.inv.go::after{animation:sheen 3s cubic-bezier(.45,0,.2,1) infinite;animation-delay:var(--d,0s)}
+.ring::before{content:"";position:absolute;inset:-3px;border-radius:15px;padding:2.5px;pointer-events:none;z-index:1;
+ background:conic-gradient(from var(--a),#2E5BC4,#22A35A 25%,#8FB4FF 45%,#2E5BC4 60%,#22A35A 80%,#2E5BC4);
+ -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s}
+.ring.go::before{opacity:1;animation:spin 2.6s linear infinite}
+.ring.go{box-shadow:0 0 0 0 rgba(46,91,196,.0);animation:halo 3s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes spin{to{--a:360deg}}
+@keyframes sheen{0%{background-position:170% 0;opacity:0}5%{opacity:1}38%{background-position:-70% 0;opacity:1}42%,100%{background-position:-70% 0;opacity:0}}
+@keyframes halo{0%,100%{box-shadow:0 0 18px -6px rgba(46,91,196,.35)}50%{box-shadow:0 0 28px -2px rgba(34,163,90,.5)}}
+.hint{position:absolute;z-index:3;top:-13px;right:14px;display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:999px;
+ background:linear-gradient(135deg,#22A35A,#15723D);color:#fff;font-size:12px;font-weight:800;letter-spacing:.01em;white-space:nowrap;pointer-events:none;
+ box-shadow:0 6px 14px -6px rgba(21,114,61,.9);animation:bob 1.6s ease-in-out infinite;transition:opacity .3s,transform .3s}
+.hint svg{width:14px;height:14px;fill:#fff;flex:none;animation:tap 1.6s ease-in-out infinite}
+.hint.gone{opacity:0;transform:scale(.6);animation:none}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes tap{0%,60%,100%{transform:scale(1)}30%{transform:scale(.8) rotate(-10deg)}}
+.loadq>label.h{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.loadq>label.h .hint{position:static;flex:none}
+.lopt.inv{overflow:visible}
+.lopt.ring.go{border-color:transparent}
+#geo{position:relative}
+@media (prefers-reduced-motion:reduce){.inv.go::after,.ring.go::before,.ring.go,.hint,.hint svg{animation:none}}
+
+
+/* ---- perks strip (compact) ---- */
+.perks{list-style:none;margin:10px 0 18px;padding:0;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:4px 0}
+.perks li{display:flex;align-items:center;gap:5px;padding:0 10px;font-size:13px;font-weight:600;color:var(--mute);white-space:nowrap}
+.perks li+li{border-left:1px solid var(--line)}
+.pk-ic{display:grid;place-items:center;width:16px;height:16px;border-radius:50%;flex:none;background:rgba(34,163,90,.16)}
+.pk-ic svg{width:10px;height:10px;fill:#22A35A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pk-ic svg{fill:#4ED38A}}
+:root[data-theme="dark"] .pk-ic svg{fill:#4ED38A}
+
+/* ---- start-here popup ---- */
+.starthere{position:absolute;z-index:5;left:50%;bottom:calc(100% - 22px);transform:translate(-50%,6px) scale(.96);opacity:0;pointer-events:none;
+ padding:8px 14px;border-radius:10px;background:#22A35A;color:#fff;font-size:13.5px;font-weight:600;white-space:nowrap;box-shadow:0 8px 20px -8px rgba(0,0,0,.45);
+ transition:opacity .28s ease,transform .28s ease}
+.starthere b{font-weight:800}
+.starthere::after{content:"";position:absolute;left:50%;top:100%;margin-left:-7px;border:7px solid transparent;border-top-color:#22A35A}
+.starthere.on{opacity:1;transform:translate(-50%,0) scale(1)}
+@media (prefers-reduced-motion:reduce){.starthere{transition:opacity .2s}}
 </style>
 </head>
 <body>
 <main>
 <div class="brand" id="brand"></div>
-<h1>Get your removals quote in 30 seconds</h1>
+<h1>Get your removals quote in a few seconds</h1>
 <p class="sub">Tell us about the move and get a price range straight away. No callback needed.</p>
+<a class="cta" href="#quote" id="ctaBtn">Get my instant price<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.2l-1.4 1.4 4.4 4.4H4v2h12.2l-4.4 4.4 1.4 1.4L20 12z"/></svg></a>
+<ul class="perks"><li><span class="pk-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4a4.5 4.5 0 00-4.5 4.5V11H7.5v2H10v3.2c0 .8-.4 1.5-1.1 1.9L8 18.6V20h10v-2h-6.6c.4-.5.6-1.2.6-1.8V13h3.5v-2H12V8.5A2.5 2.5 0 0114.5 6c1 0 1.9.6 2.3 1.5l1.8-.9A4.5 4.5 0 0014.5 4z"/></svg></span><span class="pk-t">Free</span></li><li><span class="pk-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a4 4 0 110 8 4 4 0 010-8zm0 10c4.4 0 8 1.8 8 4v2H4v-2c0-2.2 3.6-4 8-4z"/></svg></span><span class="pk-t">No sign-up</span></li><li><span class="pk-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6.5L9.5 22 20 9.5h-6.6L13 2z"/></svg></span><span class="pk-t">Instant</span></li></ul>
 <div class="trust-row">
   <a class="rate" id="rate" href="#reviews" hidden><svg class="gl" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="rate-star" aria-hidden="true">★★★★★</span><span id="rateTxt"></span><span aria-hidden="true">→</span></a>
   <a class="tpill" href="#insured"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--ok)"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1.2 13.2l5.4-5.4-1.4-1.4-4 4-1.8-1.8-1.4 1.4 3.2 3.2z"/></svg>Fully insured</a>
@@ -357,7 +427,7 @@ body.dock-pad main{padding-bottom:16px!important}
 <div class="thx-back" id="thxBack" role="dialog" aria-modal="true" aria-labelledby="thxT"><div class="thx"><div class="thx-tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3 id="thxT">Thank you!</h3><p>Your quote request is in. We'll be in touch shortly to confirm your price.</p><button type="button" id="thxClose">Done</button></div></div>
 <div id="gallery"></div>
 
-<div class="card">
+<div class="card" id="quote">
   <p class="step"><i>1</i>About your move</p>
   <div class="seg" id="seg" role="radiogroup" aria-label="Type of move">
     <label class="on" data-m="hm"><input type="radio" name="mode" value="hm" checked><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3L2 12h3v8h5v-5h4v5h5v-8h3L12 3z"/></svg><b>House move</b><span>Full end-to-end service</span></label>
@@ -875,6 +945,58 @@ $("send").addEventListener("click", async () => {
   }
   document.addEventListener("focusin", e => { if (sheetOpen) return; const t = e.target; if (t.tagName === "TEXTAREA" || (t.tagName === "INPUT" && !/^(checkbox|radio|button|submit)$/.test(t.type))) fq.classList.add("hide"); });
   document.addEventListener("focusout", () => fq.classList.remove("hide"));
+})();
+</script>
+
+<script>
+(function(){
+  var HAND='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2.5a1.75 1.75 0 013.5 0V9l.5-.06V7.5a1.75 1.75 0 013.5 0v1.9a1.75 1.75 0 013 1.2V15a7 7 0 01-7 7h-1a6.5 6.5 0 01-5.6-3.2L3.3 14.5a1.8 1.8 0 013-2L9 15V2.5z"/></svg>';
+  function chip(t){var c=document.createElement("span");c.className="hint";c.setAttribute("aria-hidden","true");c.innerHTML=HAND+t;return c;}
+  function wrap(el){var w=document.createElement("span");w.className="gw";el.parentNode.insertBefore(w,el);w.appendChild(w.ownerDocument.adoptNode?el:el);return w;}
+  var groups=[];
+  var sz=document.getElementById("size");
+  if(sz){var w=wrap(sz);w.classList.add("inv","ring");groups.push({els:[w],chips:[],stop:[sz]});}
+  var lq=document.getElementById("loadq");
+  if(lq){var ls=[].slice.call(lq.querySelectorAll(".lopt"));ls.forEach(function(l,i){l.classList.add("inv");l.style.setProperty("--d",(0.5+i*0.22)+"s");});
+    var on=lq.querySelector(".lopt.on");if(on)on.classList.add("ring");
+    groups.push({els:ls,chips:[],stop:[lq]});}
+  var geo=document.getElementById("geo"),mi=document.getElementById("miles");
+  if(geo){var gw=wrap(geo);gw.style.margin=geo.style.margin;geo.style.margin="0";gw.classList.add("inv","ring");gw.style.setProperty("--d","1.4s");
+    var els=[gw];
+    if(mi){var mw=wrap(mi);mw.classList.add("inv");mw.style.setProperty("--d","1.6s");els.push(mw);}
+    groups.push({els:els,chips:[],stop:[geo,mi,document.getElementById("pcA"),document.getElementById("pcB")]});}
+  groups.forEach(function(g){
+    g.els.forEach(function(e){e.classList.add("go");});
+    var fired=false,done=function(){if(fired)return;fired=true;g.els.forEach(function(e){e.classList.remove("go");});g.chips.forEach(function(c){c.classList.add("gone");});};
+    g.stop.forEach(function(t){if(!t)return;["change","click","focusin","input"].forEach(function(ev){t.addEventListener(ev,done);});});
+  });
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById("ctaBtn"),q=document.getElementById("quote");if(!b||!q)return;
+  var target=document.getElementById("size")||q;
+  var box=target.closest?target.closest(".f")||target.parentNode:target.parentNode;
+  var tip=document.createElement("div");tip.className="starthere";tip.setAttribute("role","status");tip.innerHTML="<b>Start here</b>";
+  if(box){box.style.position="relative";box.appendChild(tip);}
+  var tTimer;
+  function showTip(){clearTimeout(tTimer);tip.classList.remove("on");void tip.offsetWidth;tip.classList.add("on");tTimer=setTimeout(function(){tip.classList.remove("on");},3200);}
+  ["focusin","change","click"].forEach(function(ev){target.addEventListener(ev,function(){clearTimeout(tTimer);tip.classList.remove("on");});});
+  function topOf(el){var y=0;while(el){y+=el.offsetTop;el=el.offsetParent;}return y;}
+  function go(e){
+    if(e)e.preventDefault();
+    var y=Math.max(0,topOf(q)-14), se=document.scrollingElement||document.documentElement, start=se.scrollTop;
+    try{window.scrollTo({top:y,behavior:"smooth"});}catch(_){window.scrollTo(0,y);}
+    setTimeout(function(){
+      if(Math.abs((se.scrollTop||window.pageYOffset)-start)<4 && Math.abs(y-start)>20){
+        try{q.scrollIntoView({block:"start"});}catch(_){q.scrollIntoView(true);}
+        try{if(location.hash!=="#quote")history.replaceState(null,"","#quote");}catch(_){}
+      }
+    },250);
+    q.classList.remove("flash");void q.offsetWidth;q.classList.add("flash");
+    setTimeout(showTip,650);
+  }
+  b.addEventListener("click",go);
 })();
 </script>
 </body>
