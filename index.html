@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en-GB" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Instant removals quote</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap"></noscript>
+<meta name="theme-color" content="#0F1720"><meta name="color-scheme" content="dark"><script>document.documentElement.setAttribute("data-theme","dark")</script>
 <style>
 :root{--bg:#EEF1F4;--card:#fff;--ink:#14202B;--mute:#5A6773;--line:#D3DAE0;--kraft:#1F4FB5;--kraft-d:#1B45A0;--ok:#2F7D5B;--tape:#E8453C;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -310,7 +311,8 @@ body.dock-pad main{padding-bottom:16px!important}
 .fq-l{padding-left:2px}
 .trust-row .rate,.trust-row .tpill{position:relative;overflow:hidden;isolation:isolate}
 .trust-row .rate::after,.trust-row .tpill::after{content:"";position:absolute;top:0;bottom:0;left:0;width:42%;pointer-events:none;background:linear-gradient(100deg,transparent,rgba(31,79,181,.09),transparent);transform:translateX(-160%) skewX(-20deg);animation:tgl 5.5s ease-in-out infinite;will-change:transform}
-.trust-row .rate::after{background:linear-gradient(100deg,transparent,rgba(245,179,1,.2),transparent)}
+.trust-row .rate::after{background:linear-gradient(100deg,transparent,rgba(245,179,1,.32),transparent);animation:rgl 2.6s cubic-bezier(.4,0,.2,1) infinite .3s}
+@keyframes rgl{0%{transform:translateX(-160%) skewX(-20deg)}28%,100%{transform:translateX(420%) skewX(-20deg)}}
 .trust-row .tpill:nth-of-type(1)::after{animation-delay:1.4s}
 .trust-row .tpill:nth-of-type(2)::after{animation-delay:2.8s}
 @keyframes tgl{0%,55%{transform:translateX(-160%) skewX(-20deg)}100%{transform:translateX(420%) skewX(-20deg)}}
@@ -407,6 +409,10 @@ body.dock-pad main{padding-bottom:16px!important}
 .starthere::after{content:"";position:absolute;left:50%;top:100%;margin-left:-7px;border:7px solid transparent;border-top-color:#22A35A}
 .starthere.on{opacity:1;transform:translate(-50%,0) scale(1)}
 @media (prefers-reduced-motion:reduce){.starthere{transition:opacity .2s}}
+
+/* ---- dark everywhere ---- */
+:root,:root[data-theme]{color-scheme:dark}
+html,body{background-color:#0F1720}
 </style>
 </head>
 <body>
@@ -706,7 +712,7 @@ if (digits){
     let auto = false;
     CONFIG.photos.forEach((u, k) => {
       const f = mk("figure", "slide"), i = mk("img");
-      i.src = u; i.alt = CONFIG.business + " van and crew"; f.append(i); tr.append(f);
+      i.decoding = "async"; if (k > 1) i.loading = "lazy"; i.src = u; i.alt = CONFIG.business + " van and crew"; f.append(i); tr.append(f);
       const d = mk("button", "th"); d.type = "button"; d.setAttribute("aria-label", "Photo " + (k + 1));
       d.onclick = () => { stop(); go(k); }; dots.append(d);
     });
@@ -997,6 +1003,13 @@ $("send").addEventListener("click", async () => {
     setTimeout(showTip,650);
   }
   b.addEventListener("click",go);
+  var used=false;["focusin","change"].forEach(function(ev){target.addEventListener(ev,function(){used=true;});});
+  if("IntersectionObserver" in window){
+    var seen=false,io=new IntersectionObserver(function(es){
+      if(es[0].isIntersecting&&!seen&&!used){seen=true;setTimeout(showTip,250);io.disconnect();}
+    },{threshold:1,rootMargin:"0px 0px -25% 0px"});
+    io.observe(target);
+  }
 })();
 </script>
 </body>
