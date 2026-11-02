@@ -414,6 +414,18 @@ body.fq-on .fc{transform:translateY(-90px)}
 .slide img{background:#18222D}
 .th{transition:width .5s cubic-bezier(.22,1,.36,1),background .3s}
 
+/* thumbnail strip */
+.thumbs{position:relative;display:flex;justify-content:flex-start;gap:8px;padding:8px 2px 6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.thumbs::-webkit-scrollbar{display:none}
+.thumbs .th{position:relative;flex:none;width:64px;height:40px;padding:0;border:0;border-radius:9px;overflow:hidden;background:var(--card);cursor:pointer;opacity:.5;transform:scale(.94);transition:opacity .35s,transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.thumbs .th::before{display:none}
+.thumbs .th img{display:block;width:100%;height:100%;object-fit:cover}
+.thumbs .th.on{width:64px;opacity:1;transform:none;box-shadow:0 0 0 2px var(--kraft)}
+.thumbs .th:hover{opacity:.85}
+.slider.run .th.on{background:var(--card)}
+.slider.run .th.on::after{top:auto;height:3px;bottom:0;background:#fff;border-radius:0}
+@media (min-width:560px){.thumbs .th{width:76px;height:48px}.thumbs .th.on{width:76px}}
+
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .slide img{height:auto}
 
@@ -445,20 +457,20 @@ body.fq-on .fc{transform:translateY(-90px)}
 
 <div id="gallery"><div class="slider" id="slider"><div class="frame"><div class="track" id="track" tabindex="0" aria-label="Photos of our work">
 <figure class="slide on"><img src="images/photo-1.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" fetchpriority="high"></figure>
-<figure class="slide"><img src="images/photo-2.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" ></figure>
+<figure class="slide"><img src="images/photo-13.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" ></figure>
+<figure class="slide"><img src="images/photo-2.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
+<figure class="slide"><img src="images/photo-14.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
+<figure class="slide"><img src="images/photo-10.avif" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
 <figure class="slide"><img src="images/photo-3.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
+<figure class="slide"><img src="images/photo-11.avif" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
 <figure class="slide"><img src="images/photo-4.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
+<figure class="slide"><img src="images/photo-12.avif" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
 <figure class="slide"><img src="images/photo-5.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
 <figure class="slide"><img src="images/photo-6.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
 <figure class="slide"><img src="images/photo-7.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
 <figure class="slide"><img src="images/photo-8.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
 <figure class="slide"><img src="images/photo-9.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
-<figure class="slide"><img src="images/photo-10.avif" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
-<figure class="slide"><img src="images/photo-11.avif" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
-<figure class="slide"><img src="images/photo-12.avif" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
-<figure class="slide"><img src="images/photo-13.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
-<figure class="slide"><img src="images/photo-14.webp" width="640" height="400" alt="Big Moves removals team at work" decoding="async" loading="lazy"></figure>
-</div><button class="arr prev" type="button" aria-label="Previous photo">&#8249;</button><button class="arr next" type="button" aria-label="Next photo">&#8250;</button></div><div class="thumbs" id="dots"><button class="th on" type="button" aria-label="Photo 1"></button><button class="th" type="button" aria-label="Photo 2"></button><button class="th" type="button" aria-label="Photo 3"></button><button class="th" type="button" aria-label="Photo 4"></button><button class="th" type="button" aria-label="Photo 5"></button><button class="th" type="button" aria-label="Photo 6"></button><button class="th" type="button" aria-label="Photo 7"></button><button class="th" type="button" aria-label="Photo 8"></button><button class="th" type="button" aria-label="Photo 9"></button><button class="th" type="button" aria-label="Photo 10"></button><button class="th" type="button" aria-label="Photo 11"></button><button class="th" type="button" aria-label="Photo 12"></button><button class="th" type="button" aria-label="Photo 13"></button><button class="th" type="button" aria-label="Photo 14"></button></div></div></div>
+</div><button class="arr prev" type="button" aria-label="Previous photo">&#8249;</button><button class="arr next" type="button" aria-label="Next photo">&#8250;</button></div><div class="thumbs" id="dots"><button class="th on" type="button" aria-label="Photo 1"><img src="images/thumbs/t-1.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 2"><img src="images/thumbs/t-13.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 3"><img src="images/thumbs/t-2.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 4"><img src="images/thumbs/t-14.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 5"><img src="images/thumbs/t-10.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 6"><img src="images/thumbs/t-3.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 7"><img src="images/thumbs/t-11.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 8"><img src="images/thumbs/t-4.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 9"><img src="images/thumbs/t-12.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 10"><img src="images/thumbs/t-5.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 11"><img src="images/thumbs/t-6.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 12"><img src="images/thumbs/t-7.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 13"><img src="images/thumbs/t-8.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button><button class="th" type="button" aria-label="Photo 14"><img src="images/thumbs/t-9.webp" width="96" height="60" alt="" loading="lazy" decoding="async"></button></div></div></div>
 
 <div class="card" id="quote">
   <p class="step"><i>1</i>About your move</p>
@@ -795,7 +807,13 @@ calc();
   };
   const arm = () => { clearTimeout(timer); if (auto && visible && !document.hidden){ timer = setTimeout(() => go(cur + 1), 2000); sl.classList.add("run"); } };
   const stop = () => { auto = false; clearTimeout(timer); sl.classList.remove("run"); };
-  const set = k => { if (k === cur) return; dots[cur].classList.remove("on"); slides[cur].classList.remove("on"); cur = k; dots[k].classList.add("on"); slides[k].classList.add("on"); arm(); };
+  const strip = $("dots");
+  const set = k => {
+    if (k === cur) return;
+    dots[cur].classList.remove("on"); slides[cur].classList.remove("on"); cur = k; dots[k].classList.add("on"); slides[k].classList.add("on");
+    const d = dots[k]; strip.scrollTo({left: d.offsetLeft - (strip.clientWidth - d.offsetWidth) / 2, behavior: "smooth"});
+    arm();
+  };
   const sIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) set(slides.indexOf(e.target)); }), {root: tr, threshold: 0.6});
   slides.forEach(s => sIO.observe(s));
   dots.forEach((d, k) => d.onclick = () => { stop(); go(k); });
@@ -901,8 +919,7 @@ calc();
   }
   let pastTop = false;
   new IntersectionObserver(es => { const e = es[0]; pastTop = !e.isIntersecting && e.boundingClientRect.top < 0; place(); }).observe($("topbtns"));
-  new IntersectionObserver(es => { const e = es[0]; inView = e.isIntersecting || e.boundingClientRect.top < 0; place(); }, {rootMargin: "0px 0px -25% 0px"}).observe($("quote"));
-  new IntersectionObserver(es => { $("fqW").hidden = es[0].isIntersecting; }, {threshold:0.25}).observe($("lead"));
+  new IntersectionObserver(es => { const e = es[0]; if (e.isIntersecting || e.boundingClientRect.top < 0) inView = true; place(); }, {rootMargin: "0px 0px -25% 0px"}).observe($("quote"));
   function open(){ sheetOpen = true; place(); back.classList.add("open"); sheet.classList.add("open"); document.body.style.overflow = "hidden"; $("sName").value = $("name").value; $("sPhone").value = $("contact").value; setTimeout(() => $("sName").focus(), 350); }
   function close(){ sheetOpen = false; back.classList.remove("open"); sheet.classList.remove("open"); document.body.style.overflow = ""; if (document.activeElement) document.activeElement.blur(); place(); }
   $("fqB").addEventListener("click", open);
