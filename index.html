@@ -426,6 +426,64 @@ body.fq-on .fc{transform:translateY(-90px)}
 .slider.run .th.on::after{top:auto;height:3px;bottom:0;background:#fff;border-radius:0}
 @media (min-width:560px){.thumbs .th{width:76px;height:48px}.thumbs .th.on{width:76px}}
 
+/* reply-time label above floating buttons */
+.fc{flex-direction:column;align-items:flex-end;gap:8px}
+.fc-row{display:flex;align-items:center;gap:9px}
+.fc-rt{display:flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:rgba(15,23,32,.92);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.9);font-size:12px;font-weight:700;line-height:1;white-space:nowrap;box-shadow:0 8px 18px -10px rgba(0,0,0,.7)}
+.fc-rt i{width:7px;height:7px;border-radius:50%;background:#4ADE80;flex:none;box-shadow:0 0 0 3px rgba(74,222,128,.18)}
+.fc-rt[hidden]{display:none}
+
+/* align reply label with the button pair */
+.fc{align-items:stretch}
+.fc-row{justify-content:space-between;gap:12px}
+.fc-rt{justify-content:center;gap:5px;padding:6px 8px;font-size:11.5px;letter-spacing:-.01em}
+
+.fc-row{gap:12px;justify-content:space-between}
+.fc-rt{padding:6px 8px;border-radius:12px;gap:6px}
+.fc-rt span{display:flex;flex-direction:column;line-height:1.15;font-size:12px}
+.fc-rt small{font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.fc-rt{background:rgba(15,23,32,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-color:rgba(255,255,255,.1)}
+.fc-rt{background:rgba(255,255,255,.07);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);border-color:rgba(255,255,255,.16);box-shadow:none;text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.fc-rt small{color:rgba(255,255,255,.75)}
+
+/* labels under floating buttons */
+.fc{gap:6px}
+.fc-lbl{display:flex;justify-content:space-between;gap:12px}
+.fc-lbl span{flex:none;width:58px;margin:0 -2px;padding:3px 0;border-radius:999px;text-align:center;font-size:10.5px;font-weight:700;line-height:1.1;color:#fff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);text-shadow:0 1px 2px rgba(0,0,0,.6)}
+body.fq-on .fc{transform:translateY(-88px)}
+@media (max-width:360px){.fc-lbl span{width:54px;font-size:10px}}
+
+/* button + clickable label columns */
+.fc-lbl{display:none}
+.fc-row{gap:8px;justify-content:space-between}
+.fc-col{display:flex;flex-direction:column;align-items:center;gap:5px;width:78px}
+.fc-t{display:block;width:100%;padding:5px 0;border-radius:999px;text-align:center;font-size:11.5px;font-weight:700;line-height:1.1;color:#fff;text-decoration:none;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);text-shadow:0 1px 2px rgba(0,0,0,.6)}
+.fc-t:active{transform:scale(.96)}
+.fc-t:focus-visible{outline:3px solid #fff;outline-offset:2px}
+body.fq-on .fc{transform:translateY(-88px)}
+@media (max-width:360px){.fc-col{width:72px}.fc-t{font-size:11px}}
+/* reply label: centred content + pulsing dot */
+.fc-rt{justify-content:center;align-items:center;gap:7px;padding:6px 10px}
+.fc-rt span{align-items:flex-start;text-align:left}
+.fc-rt i{position:relative;width:8px;height:8px;box-shadow:none}
+.fc-rt i::after{content:"";position:absolute;inset:0;border-radius:50%;background:#4ADE80;animation:rtBlip 1.6s ease-out infinite}
+@keyframes rtBlip{0%{transform:scale(1);opacity:.8}80%,100%{transform:scale(2.8);opacity:0}}
+@media (prefers-reduced-motion:reduce){.fc-rt i::after{animation:none}}
+/* reviews pill: invite to tap (transform/opacity only, so it stays fast) */
+.trust-row .rate{position:relative;overflow:hidden;isolation:isolate;border-color:rgba(245,179,1,.45)}
+.trust-row .rate::after{content:"";position:absolute;top:0;bottom:0;left:0;width:40%;pointer-events:none;z-index:-1;background:linear-gradient(100deg,transparent,rgba(245,179,1,.42),transparent);transform:translateX(-120%) skewX(-20deg);animation:rateSh 2.8s cubic-bezier(.4,0,.2,1) infinite .6s}
+@keyframes rateSh{0%{transform:translateX(-120%) skewX(-20deg)}35%,100%{transform:translateX(330%) skewX(-20deg)}}
+.trust-row .rate::before{content:"";position:absolute;inset:-1px;border-radius:inherit;border:1.5px solid #F5B301;opacity:0;pointer-events:none;animation:rateRing 2.8s ease-in-out infinite .6s}
+@keyframes rateRing{0%,100%{opacity:0}20%{opacity:.9}45%{opacity:0}}
+.rate-go{display:inline-block;color:#F5B301;font-weight:800;animation:rateNudge 1.4s ease-in-out infinite}
+@keyframes rateNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+.trust-row .rate:active{transform:scale(.98)}
+@media (prefers-reduced-motion:reduce){.trust-row .rate::after,.trust-row .rate::before,.rate-go{animation:none}}
+.trust-row .rate{border-color:var(--line)}
+.trust-row .rate::before{display:none;animation:none}
+.fc-col{width:auto}
+.fc-row{gap:12px}
+
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .slide img{height:auto}
 
@@ -446,7 +504,7 @@ body.fq-on .fc{transform:translateY(-90px)}
 <a class="cta" href="#quote" id="ctaBtn">Get my instant price<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.2l-1.4 1.4 4.4 4.4H4v2h12.2l-4.4 4.4 1.4 1.4L20 12z"/></svg></a>
 <ul class="perks"><li><span class="pk-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4a4.5 4.5 0 00-4.5 4.5V11H7.5v2H10v3.2c0 .8-.4 1.5-1.1 1.9L8 18.6V20h10v-2h-6.6c.4-.5.6-1.2.6-1.8V13h3.5v-2H12V8.5A2.5 2.5 0 0114.5 6c1 0 1.9.6 2.3 1.5l1.8-.9A4.5 4.5 0 0014.5 4z"/></svg></span><span class="pk-t">Free</span></li><li><span class="pk-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a4 4 0 110 8 4 4 0 010-8zm0 10c4.4 0 8 1.8 8 4v2H4v-2c0-2.2 3.6-4 8-4z"/></svg></span><span class="pk-t">No sign-up</span></li><li><span class="pk-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6.5L9.5 22 20 9.5h-6.6L13 2z"/></svg></span><span class="pk-t">Instant</span></li></ul>
 <div class="trust-row">
-  <a class="rate" id="rate" href="#reviews"><svg class="gl" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="rate-star" aria-hidden="true">★★★★★</span><span id="rateTxt">See why customers love us</span><span aria-hidden="true">→</span></a>
+  <a class="rate" id="rate" href="#reviews"><svg class="gl" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="rate-star" aria-hidden="true">★★★★★</span><span id="rateTxt">See why customers love us</span><span class="rate-go" aria-hidden="true">→</span></a>
   <a class="tpill" href="#insured"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--ok)"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1.2 13.2l5.4-5.4-1.4-1.4-4 4-1.8-1.8-1.4 1.4 3.2 3.2z"/></svg>Fully insured</a>
   <a class="tpill" href="#pricematch"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--kraft-d)"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.2 14.6L6.6 12.4l1.4-1.4 2.8 2.8 5.6-5.6 1.4 1.4-7 7z"/></svg>Price-match guarantee</a>
 </div>
@@ -519,11 +577,11 @@ body.fq-on .fc{transform:translateY(-90px)}
 </section>
 
 <div class="card" id="lead">
-  <p class="step"><i>3</i>Lock in this quote</p>
+  <p class="step"><i>3</i>Submit your details</p>
   <div class="f"><label for="name">Your name</label><input id="name" type="text" autocomplete="name"></div>
   <div class="f"><label for="contact">Phone number</label><input id="contact" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 07123 456789"></div>
   <p class="fine" style="margin:0 0 12px">We'll only use your details to contact you about this quote.</p>
-  <p class="reply"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l4 2.4-.8 1.3L11 13V7h2z"/></svg>Typical reply time: <span>10–12 mins</span></p>
+  <p class="reply"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l4 2.4-.8 1.3L11 13V7h2z"/></svg>Typical reply time: <span>under 10 mins</span></p>
   <button id="send" type="button">Send my quote request</button>
   <button class="sec" id="waSend" type="button">Or message us on WhatsApp</button>
   <p class="priv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm-3 8V7a3 3 0 016 0v3H9z"/></svg>Your details are safe with us. We never share them, and we never pressure you into booking.</p>
@@ -538,18 +596,21 @@ body.fq-on .fc{transform:translateY(-90px)}
 </main>
 
 <div class="fc off" id="fc">
-  <a class="fc-b fc-call" href="tel:07360360790" aria-label="Call 07360 360790" data-track><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg></a>
-  <a class="fc-b fc-wa" id="fcWa" href="https://wa.me/447360360790" data-wa target="_blank" rel="noopener" aria-label="Message us on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.8 2.1 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.1z"/></svg></a>
+  <div class="fc-rt" id="fcRt" hidden><i aria-hidden="true"></i><span><small>Replies in</small>under 10 mins</span></div>
+  <div class="fc-row">
+    <div class="fc-col"><a class="fc-b fc-call" href="tel:07360360790" aria-label="Call 07360 360790" data-track><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg></a></div>
+    <div class="fc-col"><a class="fc-b fc-wa" id="fcWa" href="https://wa.me/447360360790" data-wa target="_blank" rel="noopener" aria-label="Message us on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.8 2.1 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.1z"/></svg></a></div>
+  </div>
 </div>
 
 <div class="sh-back" id="shBack"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="shT">
   <div class="sh-grab"></div>
-  <div class="sh-top"><div><h3 id="shT">Lock in this quote</h3><span class="sh-p" id="shP"></span></div><button class="sh-x" id="shX" type="button" aria-label="Close">&times;</button></div>
+  <div class="sh-top"><div><h3 id="shT">Submit your details</h3><span class="sh-p" id="shP"></span></div><button class="sh-x" id="shX" type="button" aria-label="Close">&times;</button></div>
   <div class="f"><label for="sName">Your name</label><input id="sName" type="text" autocomplete="name"></div>
   <div class="f"><label for="sPhone">Phone number</label><input id="sPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 07123 456789"></div>
   <p class="fine" style="margin:0 0 12px">We'll only use your details to contact you about this quote.</p>
-  <p class="reply"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l4 2.4-.8 1.3L11 13V7h2z"/></svg>Typical reply time: <span>10–12 mins</span></p>
+  <p class="reply"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l4 2.4-.8 1.3L11 13V7h2z"/></svg>Typical reply time: <span>under 10 mins</span></p>
   <button class="sh-go" id="sGo" type="button">Send my quote request</button>
   <a class="sh-wa" id="sWa" href="#">Or message us on WhatsApp</a>
   <p class="fine" id="sMsg" style="text-align:center">Final price is confirmed once we have your full inventory. No payment taken now.</p>
@@ -785,6 +846,16 @@ $("bizWa").href = "https://wa.me/" + intl + "?text=" + encodeURIComponent("Hi " 
 $("bizWa").addEventListener("click", track);
 calc();
 
+/* ---- "Replies in under 10 mins" label: shown 7am to midnight UK time ---- */
+(function(){
+  const el = $("fcRt");
+  const tick = () => {
+    const h = +new Intl.DateTimeFormat("en-GB", {hour: "numeric", hourCycle: "h23", timeZone: "Europe/London"}).format(new Date());
+    el.hidden = !(h >= 7 && h <= 23);
+  };
+  tick(); setInterval(tick, 60000);
+})();
+
 /* ---- gallery ---- */
 (function(){
   const sl = $("slider"), tr = $("track"), dots = [...$("dots").children], slides = [...tr.children], n = slides.length;
@@ -918,7 +989,8 @@ calc();
     fcEl.classList.toggle("off", !pastTop);
   }
   let pastTop = false;
-  new IntersectionObserver(es => { const e = es[0]; pastTop = !e.isIntersecting && e.boundingClientRect.top < 0; place(); }).observe($("topbtns"));
+  const onScroll = () => { const p = window.scrollY > 8; if (p !== pastTop){ pastTop = p; place(); } };
+  addEventListener("scroll", onScroll, {passive: true}); onScroll();
   new IntersectionObserver(es => { const e = es[0]; if (e.isIntersecting || e.boundingClientRect.top < 0) inView = true; place(); }, {rootMargin: "0px 0px -25% 0px"}).observe($("quote"));
   function open(){ sheetOpen = true; place(); back.classList.add("open"); sheet.classList.add("open"); document.body.style.overflow = "hidden"; $("sName").value = $("name").value; $("sPhone").value = $("contact").value; setTimeout(() => $("sName").focus(), 350); }
   function close(){ sheetOpen = false; back.classList.remove("open"); sheet.classList.remove("open"); document.body.style.overflow = ""; if (document.activeElement) document.activeElement.blur(); place(); }
