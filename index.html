@@ -487,6 +487,37 @@ body.fq-on .fc{transform:translateY(-88px)}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .slide img{height:auto}
 
+
+/* ---- Google-style reviews ---- */
+.gr-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;margin:0 0 14px}
+.gr-brand b{white-space:nowrap}
+.gr-brand{display:flex;align-items:center;gap:10px}
+.gr-brand .g-logo{width:30px;height:30px;flex:none}
+.gr-brand b{display:block;font-size:17px;line-height:1.2}
+.gr-stars{display:flex;gap:2px;margin-top:3px}
+.gr-stars svg{width:16px;height:16px;fill:#FBBC04}
+.gr-count{font-size:13px;font-weight:600;color:var(--mute);text-decoration:none;white-space:nowrap}
+.gr-count:hover{color:var(--ink)}
+.gr-track .gr{flex:0 0 86%;scroll-snap-align:start;margin:0;padding:16px;border-radius:14px;background:var(--bg);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px;font-family:Roboto,Arial,system-ui,sans-serif}
+@media (min-width:560px){.gr-track .gr{flex-basis:64%}}
+.gr-top{display:flex;align-items:center;gap:10px}
+.gr-av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:600;font-size:17px;flex:none}
+.gr-who{display:flex;flex-direction:column;line-height:1.25;flex:1;min-width:0}
+.gr-who b{font-weight:600;font-size:15px}
+.gr-who small{color:var(--mute);font-size:12.5px}
+.gr-g svg{width:20px;height:20px;display:block}
+.gr .gr-stars{margin:0}
+.gr .gr-stars svg{width:15px;height:15px}
+.gr-text{margin:0;font-size:14.5px;line-height:1.55;color:var(--ink);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.gr.open .gr-text{display:block;-webkit-line-clamp:unset}
+.gr-more{width:auto;align-self:flex-start;padding:0;margin:-4px 0 0;background:none;border:0;box-shadow:none;color:#8AB4F8;font-size:14px;font-weight:600;cursor:pointer}
+.gr-more:hover{filter:none;text-decoration:underline}
+.gr-view{margin-top:auto;font-size:13px;font-weight:600;color:#8AB4F8;text-decoration:none}
+.gr-view:hover{text-decoration:underline}
+.gr-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+.gr-acts a{display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 10px;border-radius:12px;font-weight:700;font-size:14px;text-decoration:none;text-align:center}
+.gr-all{background:#fff;color:#1F1F1F}
+.gr-leave{border:1px solid var(--line);color:var(--ink)}
 </style>
 </head>
 <body>
@@ -557,7 +588,7 @@ body.fq-on .fc{transform:translateY(-88px)}
         <label class="on"><input type="radio" name="dm" value="mi" checked>Miles</label>
         <label><input type="radio" name="dm" value="pc">Postcodes</label>
       </div>
-      <div id="miBox"><label for="miles" class="vh">Miles between addresses</label><input id="miles" type="number" min="1" max="500" value="15" inputmode="numeric" aria-label="Miles between addresses"></div>
+      <div id="miBox"><label for="miles" class="vh">Miles between addresses</label><input id="miles" type="number" min="1" max="500" value="1" inputmode="numeric" aria-label="Miles between addresses"></div>
       <div id="pcBox" hidden><div class="row">
         <div class="f"><label for="pcA">Moving from</label><input id="pcA" type="text" autocomplete="postal-code" autocapitalize="characters" placeholder="e.g. BL1 1AA"></div>
         <div class="f"><label for="pcB">Moving to</label><input id="pcB" type="text" autocapitalize="characters" placeholder="e.g. M1 1AE"></div>
@@ -654,9 +685,10 @@ const CONFIG = {
   ],
   priceMatchNote: "No pressure and no hidden catches.",
   insuranceNote: "Want to see our certificates? Just ask and we will send them over.",
-  reviews: [{"name": "Violet M.", "text": "I am a student living away from home which means at the end of each year I have to relocate all my things. With the big moves teams help it was stress free and very efficient, I'd recommend them to anyone :)"}, {"name": "Alex W.", "text": "Had a great experience with Big Moves Removals last year. We had a very full house when my wife and I combined houses, so a lot of stuff to move. Big Moves came a moved the lot on a tight timeframe and did a professional job! Very pleased with Baz and the team's work."}, {"name": "Jonny O.", "text": "Brilliant service, highly recommend! We've moved twice with Baz now, and he's always been really friendly, efficient, and professional. Will definitely use him again in future!"}, {"name": "Adam F.", "text": "Fantastic service and very friendly! Went the extra mile for me cheers lads"}],
+  reviews: [{"name": "Martyn I.", "link": "https://www.google.com/maps/contrib/114179438685825904000/reviews?hl=en-GB", "text": "Absolutely brilliant service from start to finish! I used this company for my three-bedroom house move and honestly couldn’t be happier with the experience.\n\nThe team was professional, friendly, punctual and incredibly helpful throughout the whole process. They handled all my belongings with care, worked efficiently and made what could have been a stressful day feel completely hassle-free.\n\nEverything went smoothly, communication was great and the level of service was excellent. It’s not often you come across a company that genuinely delivers on everything they promise.\n\nI would highly recommend them to anyone looking for a reliable and professional removal company. Fantastic job Baz, thank you again! 👏"}, {"name": "Jonny O.", "text": "Brilliant service, highly recommend! We've moved twice with Baz now, and he's always been really friendly, efficient, and professional. Will definitely use him again in future!"}, {"name": "Alex W.", "text": "Had a great experience with Big Moves Removals last year. We had a very full house when my wife and I combined houses, so a lot of stuff to move. Big Moves came a moved the lot on a tight timeframe and did a professional job! Very pleased with Baz and the team's work."}, {"name": "Adam F.", "text": "Fantastic service and very friendly! Went the extra mile for me cheers lads"}, {"name": "Violet M.", "text": "I am a student living away from home which means at the end of each year I have to relocate all my things. With the big moves teams help it was stress free and very efficient, I'd recommend them to anyone :)"}],
   reviewCount: "17 reviews on Google",
   reviewLink: "https://g.page/r/CQvLLEg3AsyKEBM/review",
+  reviewsUrl: "https://www.google.com/maps/place/Big+Moves+Removals/@53.4516583,-4.3839004,8z/data=!4m12!1m2!2m1!1sbig+moves!3m8!1s0x487bada3ead9c0b7:0x8acc0237482ccb0b!8m2!3d53.4516583!4d-2.2745254!9m1!1b1!15sCgliaWcgbW92ZXNaCyIJYmlnIG1vdmVzkgEObW92aW5nX2NvbXBhbnmaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjA1YkdReU1USmxSMUpMVG01V00xSkZSbkJPYkRrMVkycGFSMU14UlJBQuABAPoBBAgAEDk!16s%2Fg%2F11yw4f5nhl?entry=ttu&g_ep=EgoyMDI2MTEwMS4wIKXMDSoASAFQAw%3D%3D",   // your Google reviews page
   faqs: [
     {q:"Which areas do you cover?", a:"We're based in Bolton and cover all of Greater Manchester, including Manchester, Salford, Bury, Wigan, Stockport, Farnworth, Horwich and Westhoughton. We also do long-distance moves across the UK."},
     {q:"How accurate is the price?", a:"The range is an estimate based on your house size and distance, assuming a typical amount of furniture. We confirm a fixed price once we know your full inventory and access."},
@@ -720,7 +752,7 @@ function calc(){
   $("qnote").textContent = "Based on a typical amount of furniture for your house size. We confirm a fixed price once we know what you're moving.";
   const key = $("size").value, s = SIZES[key];
   const m = getMiles();
-  const miles = m == null ? 15 : m;
+  const miles = m == null ? 1 : m;
   const hours = Math.max(CONFIG.minHours, s.h);
   let cost = hours * (s.v * CONFIG.vanPerHour + s.c * CONFIG.moverPerHour) + miles * 2 * CONFIG.mileRate * s.v;
   cost = Math.max(CONFIG.minCharge, cost);
@@ -732,7 +764,7 @@ function calc(){
   current = {size:s.t, miles, lo, hi, crew:s.c, van, dur};
   $("price").textContent = "£" + lo.toLocaleString("en-GB") + " – £" + hi.toLocaleString("en-GB");
   $("detail").innerHTML = "<b>" + van + "</b>, <b>" + s.c + " movers</b>, about <b>" + dur + " hours</b> including travel.";
-  $("sline").textContent = (distMode === "pc" && m == null) ? "Enter both postcodes to include your distance (showing 15 miles for now)." : "";
+  $("sline").textContent = (distMode === "pc" && m == null) ? "Enter both postcodes to include your distance (showing 1 mile for now)." : "";
 }
 function quoteLines(){
   const q = current, L = [];
@@ -901,19 +933,35 @@ calc();
   const mk = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt) e.textContent = txt; return e; };
   const frag = document.createDocumentFragment();
   if (CONFIG.reviews.length){
-    const c = mk("div", "card revs"), top = mk("div", "revs-top"); c.id = "reviews";
-    top.append(mk("h2", null, "What customers say"), mk("span", "revs-count", CONFIG.reviewCount)); c.append(top);
-    const tr = mk("div", "rv-track"), cols = ["#1B45A0", "#E8453C", "#2F7D5B", "#7A4FD6"];
-    tr.tabIndex = 0; tr.setAttribute("aria-label", "Customer reviews");
+    const c = mk("div", "card revs"); c.id = "reviews";
+    const allUrl = CONFIG.reviewsUrl || CONFIG.reviewLink, G = '<svg class="g-logo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>', STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.3l6.2 3.7-1.6-7 5.4-4.7-7.1-.6L12 2 9.1 8.7 2 9.3l5.4 4.7-1.6 7z"/></svg>';
+    const head = mk("div", "gr-head");
+    head.innerHTML = '<div class="gr-brand">' + G + '<div><b>Google reviews</b><span class="gr-stars" aria-label="5 out of 5 stars">' + STAR.repeat(5) + '</span></div></div>';
+    const cnt = mk("a", "gr-count", "All reviews ↗"); cnt.href = allUrl; cnt.target = "_blank"; cnt.rel = "noopener"; head.append(cnt);
+    c.append(head);
+    const tr = mk("div", "rv-track gr-track"), cols = ["#1A73E8", "#D93025", "#188038", "#E37400", "#9334E6"];
+    tr.tabIndex = 0; tr.setAttribute("aria-label", "Customer reviews from Google");
     CONFIG.reviews.forEach((r, k) => {
-      const f = mk("figure", "rv"), st = mk("div", "stars", "★★★★★"); st.setAttribute("aria-label", "5 out of 5 stars");
-      const by = mk("figcaption", "rv-by"), av = mk("span", "rv-av", r.name.charAt(0)), who = mk("span", "rv-who");
+      const f = mk("figure", "gr");
+      const top = mk("div", "gr-top"), av = mk("span", "gr-av", r.name.charAt(0)), who = mk("span", "gr-who");
       av.style.background = cols[k % cols.length];
-      who.append(mk("b", null, r.name), mk("small", null, "Google review"));
-      by.append(av, who); f.append(st, mk("blockquote", null, "“" + r.text + "”"), by); tr.append(f);
+      who.append(mk("b", null, r.name), mk("small", null, "Posted on Google"));
+      const gl = mk("span", "gr-g"); gl.innerHTML = G; top.append(av, who, gl);
+      const st = mk("div", "gr-stars"); st.innerHTML = STAR.repeat(5); st.setAttribute("aria-label", "5 out of 5 stars");
+      const body = mk("p", "gr-text"); r.text.split(/\n\n+/).forEach((para, i) => { if (i) body.append(document.createElement("br"), document.createElement("br")); body.append(document.createTextNode(para)); });
+      f.append(top, st, body);
+      const more = mk("button", "gr-more", "Read more"); more.type = "button";
+      more.addEventListener("click", () => { const open = f.classList.toggle("open"); more.textContent = open ? "Show less" : "Read more"; });
+      f.append(more);
+      const v = mk("a", "gr-view", "View on Google ↗"); v.href = r.link || allUrl; v.target = "_blank"; v.rel = "noopener"; f.append(v);
+      tr.append(f);
+      requestAnimationFrame(() => { if (body.scrollHeight <= body.clientHeight + 2) more.hidden = true; });
     });
     c.append(tr);
-    const a = mk("a", "revs-link", "Used Big Moves? Leave us a review"); a.href = CONFIG.reviewLink; a.target = "_blank"; a.rel = "noopener"; c.append(a);
+    const acts = mk("div", "gr-acts");
+    const all = mk("a", "gr-all", "See all reviews on Google"); all.href = allUrl; all.target = "_blank"; all.rel = "noopener";
+    const lv = mk("a", "gr-leave", "Leave a review"); lv.href = CONFIG.reviewLink; lv.target = "_blank"; lv.rel = "noopener";
+    acts.append(all, lv); c.append(acts);
     frag.append(c);
   }
   const box = (id, cls, icon, title, items, note) => {
