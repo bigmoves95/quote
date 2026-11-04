@@ -526,30 +526,20 @@ body.fq-on .fc{transform:translateY(-88px)}
 @media (prefers-reduced-motion:reduce){.starthere{transition:opacity .2s}}
 /* ---- price-match note in the details sheet ---- */
 .sh-pm{margin:-6px 0 14px;padding:10px 12px;border-radius:12px;background:rgba(34,163,90,.12);border:1px solid rgba(34,163,90,.35);font-size:14px;line-height:1.45}
-/* ---- desktop layout (phones unchanged) ---- */
-@media (min-width:1024px){
-  main.dk{max-width:1200px;padding:28px 32px 60px}
-  .dk-head{display:flex;align-items:center;justify-content:space-between;gap:28px;margin:0 0 34px;padding:0 0 22px;border-bottom:1px solid var(--line)}
-  .dk-head .brand{flex:1;margin:0}
-  .dk-head .topbtns{display:flex;gap:10px;margin:0;width:auto}
-  .dk-head .topbtns .btn{width:auto;min-width:170px;padding:0 22px}
-  .dk-grid{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:44px;align-items:start}
-  .dk-left h1{font-size:54px;line-height:1.04;margin:0 0 14px}
-  .dk-left .sub{font-size:19px;max-width:560px}
-  .dk-left .cta{max-width:420px}
-  .dk-left .perks{justify-content:flex-start}
-  .dk-left .trust-row{max-width:620px}
-  .dk-left .reach{max-width:620px}
-  .dk-left #gallery{margin-top:8px}
-  .dk-right{position:sticky;top:20px}
-  .dk-right .card,.dk-right .quote{margin-bottom:16px}
-  .dk-below{margin-top:36px}
-  .dk-below #trust{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-  .dk-below #trust>.card{margin:0}
-  .dk-below #reviews,.dk-below #trust>.card:last-child{grid-column:1/-1}
-  .dk-below .gr-track .gr{flex-basis:calc(33.333% - 8px)}
-  .fq{display:none!important}
-  .foot{max-width:1200px}
+/* ---- desktop: same single column as phone, just roomier (phones unchanged) ---- */
+@media (min-width:900px){
+  main{max-width:800px;padding:36px 24px 60px}
+  h1{font-size:52px;line-height:1.05;margin:10px 0 14px}
+  .sub{font-size:19px}
+  .cta{min-height:66px;font-size:20px}
+  .perks{margin:14px 0 22px}
+  .perks li{font-size:14.5px}
+  .trust-row,.reach{margin-bottom:22px}
+  #gallery{margin-bottom:8px}
+  .card,.quote{padding:28px 30px}
+  .quote .price{font-size:64px}
+  .gr-track .gr{flex-basis:48%}
+  .foot{max-width:800px}
 }
 </style>
 </head>
@@ -1126,27 +1116,6 @@ const OUT = "AB10,57.135,-2.117;AB11,57.139,-2.091;AB12,57.101,-2.111;AB13,57.10
     beat.addEventListener("click",function(e){e.preventDefault();window.__pm=true;T.textContent="Send us your details";note.hidden=false;$("fqB").click();});
     new MutationObserver(function(){if(!sheet.classList.contains("open")){window.__pm=false;T.textContent=orig;note.hidden=true;}}).observe(sheet,{attributes:true,attributeFilter:["class"]});
   }
-  /* --- desktop: two-column layout; phones keep the original order --- */
-  var main=document.querySelector("main"),mq=window.matchMedia("(min-width:1024px)");
-  if(!main)return;
-  var order=[].slice.call(main.children),wrap=null;
-  function pick(sel){return main.querySelector(sel);}
-  function arrange(){
-    if(mq.matches&&!wrap){
-      var mk=function(c){var d=document.createElement("div");d.className=c;return d;};
-      var H=mk("dk-head"),G=mk("dk-grid"),L=mk("dk-left"),Rt=mk("dk-right"),B=mk("dk-below");
-      [pick("#brand"),pick("#topbtns")].forEach(function(n){if(n)H.appendChild(n);});
-      [pick("h1"),pick(".sub"),pick("#ctaBtn"),pick(".perks"),pick(".trust-row"),pick(".reach"),pick("#gallery"),pick("#biz")].forEach(function(n){if(n)L.appendChild(n);});
-      [pick("#quote"),pick("section.quote"),pick("#lead")].forEach(function(n){if(n)Rt.appendChild(n);});
-      var tr=pick("#trust");if(tr)B.appendChild(tr);
-      G.appendChild(L);G.appendChild(Rt);main.appendChild(H);main.appendChild(G);main.appendChild(B);
-      main.classList.add("dk");wrap=[H,G,B];
-    }else if(!mq.matches&&wrap){
-      order.forEach(function(n){main.appendChild(n);});wrap.forEach(function(w){w.remove();});wrap=null;main.classList.remove("dk");
-    }
-  }
-  arrange();
-  if(mq.addEventListener)mq.addEventListener("change",arrange);else if(mq.addListener)mq.addListener(arrange);
 })();
 </script>
 </body>
