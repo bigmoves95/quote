@@ -541,6 +541,34 @@ body.fq-on .fc{transform:translateY(-88px)}
   .gr-track .gr{flex-basis:48%}
   .foot{max-width:800px}
 }
+
+/* ---- tablets & laptops (can't make calls): call back instead of call buttons. Phones unchanged. ---- */
+.fc-cbw{display:none}
+html.nophone .fc .fc-row,html.nophone .fc .fc-rt{display:none!important}
+html.nophone .fc-cbw{display:flex;flex-direction:column;align-items:flex-end;gap:7px}
+.fc-cbn{display:flex;align-items:center;gap:6px;padding:6px 10px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:#fff;font-size:12px;font-weight:700;line-height:1.15;text-shadow:0 1px 2px rgba(0,0,0,.6);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.fc-cbn i{width:7px;height:7px;border-radius:50%;background:#4ADE80;flex:none;box-shadow:0 0 0 3px rgba(74,222,128,.18)}
+.fc-cbn small{display:block;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.fc-cb{display:flex;align-items:center;gap:10px;height:54px;width:auto;padding:0 22px 0 18px;border:0;border-radius:999px;background:linear-gradient(135deg,#2FC46B,#1A9A50);color:#fff;font:inherit;font-size:16px;font-weight:800;cursor:pointer;box-shadow:0 10px 22px -8px rgba(0,0,0,.65);animation:fcPop 4.8s ease-in-out 2s infinite}
+.fc-cb svg{width:22px;height:22px;fill:#fff;flex:none}
+.fc-cb:hover{filter:brightness(1.08)}
+.sh-cb{margin:-6px 0 14px;padding:10px 12px;border-radius:12px;background:rgba(34,163,90,.12);border:1px solid rgba(34,163,90,.35);font-size:14px;line-height:1.45}
+
+/* ---- hide the price in the details pop-up ---- */
+#shP{display:none!important}
+/* ---- "We'll call you back in 5 mins" banner ---- */
+.cb5{display:flex;align-items:center;gap:12px;width:100%;margin:2px 0 18px;padding:12px 14px;border-radius:16px;border:1px solid rgba(74,222,128,.45);background:linear-gradient(135deg,rgba(34,163,90,.22),rgba(34,163,90,.08));color:var(--ink);font:inherit;text-align:left;cursor:pointer;box-shadow:none}
+.cb5:hover{filter:brightness(1.08)}
+.cb5:active{transform:scale(.99)}
+.cb5-ic{position:relative;flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#22A35A}
+.cb5-ic svg{width:20px;height:20px;fill:#fff}
+.cb5-ic::after{content:"";position:absolute;top:1px;right:1px;width:10px;height:10px;border-radius:50%;background:#4ADE80;box-shadow:0 0 0 2px #0F1720}
+.cb5-t{display:flex;flex-direction:column;flex:1;min-width:0;line-height:1.25}
+.cb5-t b{font-size:16.5px;font-weight:800}
+.cb5-t small{font-size:13px;color:var(--mute)}
+.cb5-go{flex:none;font-size:20px;color:#4ADE80;font-weight:800}
+
+.cb5{margin-top:14px}
 </style>
 </head>
 <body>
@@ -556,7 +584,7 @@ body.fq-on .fc{transform:translateY(-88px)}
 <h1>Get an unbeatable price in a few seconds.</h1>
 <p class="sub">Found it cheaper? We'll beat it. Call now for an instant no obligation quote.</p>
 <a class="cta" href="#quote" id="ctaBtn">Get my instant price<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.2l-1.4 1.4 4.4 4.4H4v2h12.2l-4.4 4.4 1.4 1.4L20 12z"/></svg></a>
-<ul class="perks"><li><span class="pk-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4a4.5 4.5 0 00-4.5 4.5V11H7.5v2H10v3.2c0 .8-.4 1.5-1.1 1.9L8 18.6V20h10v-2h-6.6c.4-.5.6-1.2.6-1.8V13h3.5v-2H12V8.5A2.5 2.5 0 0114.5 6c1 0 1.9.6 2.3 1.5l1.8-.9A4.5 4.5 0 0014.5 4z"/></svg></span><span class="pk-t">Free</span></li><li><span class="pk-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a4 4 0 110 8 4 4 0 010-8zm0 10c4.4 0 8 1.8 8 4v2H4v-2c0-2.2 3.6-4 8-4z"/></svg></span><span class="pk-t">No sign-up</span></li><li><span class="pk-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6.5L9.5 22 20 9.5h-6.6L13 2z"/></svg></span><span class="pk-t">Instant</span></li></ul>
+<button class="cb5" id="cb5" type="button"><span class="cb5-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg></span><span class="cb5-t"><b>We'll call you back in 5 mins</b><small>Leave your name and number. No obligation.</small></span><span class="cb5-go" aria-hidden="true">→</span></button>
 <div class="trust-row">
   <a class="rate" id="rate" href="#reviews"><svg class="gl" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="rate-star" aria-hidden="true">★★★★★</span><span id="rateTxt">See why customers love us</span><span class="rate-go" aria-hidden="true">→</span></a>
   <a class="tpill" href="#insured"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--ok)"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1.2 13.2l5.4-5.4-1.4-1.4-4 4-1.8-1.8-1.4 1.4 3.2 3.2z"/></svg>Fully insured</a>
@@ -640,7 +668,7 @@ body.fq-on .fc{transform:translateY(-88px)}
   <div class="f"><label for="name">Your name</label><input id="name" type="text" autocomplete="name"></div>
   <div class="f"><label for="contact">Phone number</label><input id="contact" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 07123 456789"></div>
   <p class="fine" style="margin:0 0 12px">We'll only use your details to contact you about this quote.</p>
-  <p class="reply"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l4 2.4-.8 1.3L11 13V7h2z"/></svg>Typical reply time: <span>under 10 mins</span></p>
+  <p class="reply"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l4 2.4-.8 1.3L11 13V7h2z"/></svg>Typical reply time: <span>under 5 mins</span></p>
   <button id="send" type="button">Send my quote request</button>
   <button class="sec" id="waSend" type="button">Or message us on WhatsApp</button>
   <p class="priv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm-3 8V7a3 3 0 016 0v3H9z"/></svg>Your details are safe with us. We never share them, and we never pressure you into booking.</p>
@@ -655,7 +683,7 @@ body.fq-on .fc{transform:translateY(-88px)}
 </main>
 
 <div class="fc off" id="fc">
-  <div class="fc-rt" id="fcRt" hidden><i aria-hidden="true"></i><span><small>Replies in</small>under 10 mins</span></div>
+  <div class="fc-rt" id="fcRt" hidden><i aria-hidden="true"></i><span><small>Replies in</small>under 5 mins</span></div>
   <div class="fc-row">
     <div class="fc-col"><a class="fc-b fc-call" href="tel:07360360790" aria-label="Call 07360 360790" data-track><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg></a></div>
     <div class="fc-col"><a class="fc-b fc-wa" id="fcWa" href="https://wa.me/447360360790" data-wa target="_blank" rel="noopener" aria-label="Message us on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.8 2.1 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.1z"/></svg></a></div>
@@ -669,7 +697,7 @@ body.fq-on .fc{transform:translateY(-88px)}
   <div class="f"><label for="sName">Your name</label><input id="sName" type="text" autocomplete="name"></div>
   <div class="f"><label for="sPhone">Phone number</label><input id="sPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="e.g. 07123 456789"></div>
   <p class="fine" style="margin:0 0 12px">We'll only use your details to contact you about this quote.</p>
-  <p class="reply"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l4 2.4-.8 1.3L11 13V7h2z"/></svg>Typical reply time: <span>under 10 mins</span></p>
+  <p class="reply"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l4 2.4-.8 1.3L11 13V7h2z"/></svg>Typical reply time: <span>under 5 mins</span></p>
   <button class="sh-go" id="sGo" type="button">Send my quote request</button>
   <a class="sh-wa" id="sWa" href="#">Or message us on WhatsApp</a>
   <p class="fine" id="sMsg" style="text-align:center">Final price is confirmed once we have your full inventory. No payment taken now.</p>
@@ -900,7 +928,7 @@ $("send").addEventListener("click", async () => {
   const name = $("name").value.trim(), contact = $("contact").value.trim();
   if (!name || !contact){ $("msg").textContent = "Enter your name and phone number so we can reach you."; return; }
   $("send").disabled = true; $("msg").textContent = "Sending...";
-  const summary = (window.__pm ? "PRICE MATCH REQUEST: has a cheaper quote and wants us to beat it\n\n" : "") + "Quote request from " + name + " (" + contact + ")\n\n" + quoteLines().map(l => "• " + l).join("\n");
+  const summary = (window.__pm ? "PRICE MATCH REQUEST: has a cheaper quote and wants us to beat it\n\n" : "") + (window.__cb ? "CALL BACK REQUEST: call them back within 5 minutes\n\n" : "") + "Quote request from " + name + " (" + contact + ")\n\n" + quoteLines().map(l => "• " + l).join("\n");
   try{
     const r = await fetch(CONFIG.formUrl, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify({name, contact, summary})});
     if (!r.ok) throw 0;
@@ -1067,13 +1095,17 @@ calc();
   new MutationObserver(update).observe($("price"), {childList:true, characterData:true, subtree:true});
   update();
   function place(){
-    const show = inView && !sheetOpen && !typing;
+    const show = engaged && inView && !sheetOpen && !typing;
     fq.classList.toggle("off", !show);
     document.body.classList.toggle("fq-on", show);
     fcEl.classList.toggle("hide", sheetOpen || typing);
     fcEl.classList.toggle("off", !pastTop);
   }
   let pastTop = false;
+  /* live price bar only appears once they start using the quote form (bedrooms, man & van, distance, hours) */
+  let engaged = false;
+  const engage = () => { if (!engaged){ engaged = true; place(); } };
+  $("quote").addEventListener("change", engage); $("quote").addEventListener("input", engage);
   const onScroll = () => { const p = window.scrollY > 8; if (p !== pastTop){ pastTop = p; place(); } };
   addEventListener("scroll", onScroll, {passive: true}); onScroll();
   new IntersectionObserver(es => { const e = es[0]; if (e.isIntersecting || e.boundingClientRect.top < 0) inView = true; place(); }, {rootMargin: "0px 0px -25% 0px"}).observe($("quote"));
@@ -1116,6 +1148,31 @@ const OUT = "AB10,57.135,-2.117;AB11,57.139,-2.091;AB12,57.101,-2.111;AB13,57.10
     beat.addEventListener("click",function(e){e.preventDefault();window.__pm=true;T.textContent="Send us your details";note.hidden=false;$("fqB").click();});
     new MutationObserver(function(){if(!sheet.classList.contains("open")){window.__pm=false;T.textContent=orig;note.hidden=true;}}).observe(sheet,{attributes:true,attributeFilter:["class"]});
   }
+})();
+</script>
+<script>
+/* tablets & laptops: shortest screen side 600px+ (phones are under ~500 even sideways) */
+(function(){
+  var $=function(i){return document.getElementById(i);};
+  var sheet=$("sheet"),T=$("shT");if(!sheet||!$("fqB"))return;
+  var nophone=Math.min(screen.width||0,screen.height||0)>=600, fc=$("fc");
+  if(nophone)document.documentElement.classList.add("nophone");
+  var w=document.createElement("div");w.className="fc-cbw";
+  w.innerHTML='<div class="fc-cbn"><i aria-hidden="true"></i><span><small>Call back</small>within 5 mins</span></div><button class="fc-cb" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg>Get a call back</button>';
+  if(fc&&nophone)fc.appendChild(w);
+  var note=document.createElement("p");note.className="sh-cb";note.hidden=true;
+  note.innerHTML="<b>We'll call you back within 5 minutes.</b> Just leave your name and number.";
+  var top=sheet.querySelector(".sh-top");top.parentNode.insertBefore(note,top.nextSibling);
+  var orig=T.textContent;
+  function openCB(e){if(e)e.preventDefault();window.__cb=true;T.textContent="Get a call back";note.hidden=false;$("fqB").click();}
+  w.querySelector(".fc-cb").addEventListener("click",openCB);
+  var b5=$("cb5");if(b5)b5.addEventListener("click",openCB);
+  /* top Call button: becomes "Get a call back" */
+  var tc=nophone&&document.querySelector("#topbtns .btn.call");
+  if(tc){tc.removeAttribute("data-track");var c=tc.cloneNode(true);c.removeAttribute("href");c.setAttribute("role","button");c.lastChild.nodeType===3?c.lastChild.textContent="Get a call back":c.append("Get a call back");
+    [].slice.call(c.childNodes).forEach(function(n){if(n.nodeType===3&&n!==c.lastChild)n.remove();});
+    c.style.cursor="pointer";c.addEventListener("click",openCB);tc.parentNode.replaceChild(c,tc);}
+  new MutationObserver(function(){if(!sheet.classList.contains("open")&&window.__cb){window.__cb=false;T.textContent=orig;note.hidden=true;}}).observe(sheet,{attributes:true,attributeFilter:["class"]});
 })();
 </script>
 </body>
