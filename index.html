@@ -572,6 +572,9 @@ html.nophone .fc-cbw{display:flex;flex-direction:column;align-items:flex-end;gap
 .cb5{margin-top:14px}
 
 /* ---- Google reviews strip ---- */
+.price.wait,.quote .price.wait{font-size:20px;font-weight:700;letter-spacing:0;color:rgba(255,255,255,.82);margin:10px 0 6px}
+#size:invalid{color:var(--mute)}
+#size option{color:var(--ink)}
 .cta{min-height:52px;padding:13px 18px;font-size:17.5px;border-radius:14px}
 .cta svg{width:20px;height:20px}
 @media (min-width:900px){.cta{min-height:58px;font-size:18.5px}}
@@ -678,19 +681,20 @@ fit();addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)doc
   <div id="mvFields" hidden>
     <div class="f"><span class="lbl" id="crewLbl">How many movers?</span>
       <div class="dt" id="crewT" role="radiogroup" aria-labelledby="crewLbl">
-        <label><input type="radio" name="crew" value="1">1 man &amp; van</label>
-        <label class="on"><input type="radio" name="crew" value="2" checked>2 men &amp; van</label>
+        <label class="on"><input type="radio" name="crew" value="1" checked>1 man &amp; van</label>
+        <label><input type="radio" name="crew" value="2">2 men &amp; van</label>
       </div></div>
     <div class="f"><label for="mvh">How many hours do you need?</label>
-      <select id="mvh"><option value="2">2 hours (minimum)</option><option value="3" selected>3 hours</option><option value="4">4 hours</option><option value="5">5 hours</option><option value="6">6 hours</option><option value="7">7 hours</option><option value="8">8 hours</option><option value="10">10 hours</option></select></div>
-    <p class="mvrates" id="mvRates"><b>2 lads and a van, £85/hr</b>, 2 hour minimum. Book 4 hours or more and it drops to £75/hr. Great for a few items, a single room or a quick job. Moving home? Choose House move for a proper quote.</p>
+      <select id="mvh"><option value="2" selected>2 hours (minimum)</option><option value="3">3 hours</option><option value="4">4 hours</option><option value="5">5 hours</option><option value="6">6 hours</option><option value="7">7 hours</option><option value="8">8 hours</option><option value="10">10 hours</option></select></div>
+    <p class="mvrates" id="mvRates"><b>1 man and a van, £60/hr</b>, 2 hour minimum. Book 4 hours or more and it drops to £50/hr. Great for a few items, a single room or a quick job. Moving home? Choose House move for a proper quote.</p>
   </div>
   <div id="hmFields">
     <div class="f"><label for="size">House size</label>
-      <select id="size">
+      <select id="size" required>
+        <option value="" disabled selected>Choose your house size</option>
         <option value="studio">Studio</option>
         <option value="b1">1 bedroom</option>
-        <option value="b2" selected>2 bedrooms</option>
+        <option value="b2">2 bedrooms</option>
         <option value="b3">3 bedrooms</option>
         <option value="b4">4 bedrooms</option>
         <option value="b5">5+ bedrooms</option>
@@ -820,7 +824,8 @@ const CONFIG = {
   minHours: 3.5,                    // minimum chargeable hours per job
   sizeDiscount: {b3:0.06,b4:0.07,b5:0.08}, // % off the move price for bigger homes
   mileRate: 1.9,                    // £ per van per mile driven, round trip
-  range: 0.12                       // price shown as ±12%
+  range: 0.12,                      // top of the price range: +12%
+  rangeLo: 0.20                     // bottom of the price range: -20%
 };
 const SIZES = {
   studio:{h:2.5,v:1,c:2,t:"Studio"}, b1:{h:3.5,v:1,c:2,t:"1 bed"}, b2:{h:5,v:1,c:2,t:"2 bed"},
@@ -860,6 +865,7 @@ function calc(){
     const who = cr === 1 ? "1 man and a van" : "2 lads and a van";
     const nx = T.slice().reverse().find(t => t[0] > h);
     current = {mv:true, size:"Man & van", hrs:h, rate:r, lo:tot, hi:tot, crew:cr, van:"1 van", dur:h};
+    $("price").classList.remove("wait");
     $("price").textContent = "£" + tot.toLocaleString("en-GB");
     $("detail").innerHTML = "<b>" + who + "</b> for <b>" + h + " hours</b> at <b>£" + r + " per hour</b>.";
     $("mvRates").innerHTML = "<b>" + who + ", £" + T[T.length-1][1] + "/hr</b>, 2 hour minimum. Book 4 hours or more and it drops to £" + T[0][1] + "/hr. Great for a few items, a single room or a quick job. Moving home? Choose House move for a proper quote.";
@@ -869,13 +875,22 @@ function calc(){
   }
   $("qnote").textContent = "Based on a typical amount of furniture for your house size. We confirm a fixed price once we know what you're moving.";
   const key = $("size").value, s = SIZES[key];
+  if (!s){
+    current = {};
+    $("price").textContent = "Choose your house size";
+    $("price").classList.add("wait");
+    $("detail").innerHTML = ""; $("sline").textContent = "";
+    $("qnote").textContent = "Pick your house size above and your price appears here instantly.";
+    return;
+  }
+  $("price").classList.remove("wait");
   const m = getMiles();
   const miles = m == null ? 1 : m;
   const hours = Math.max(CONFIG.minHours, s.h);
   let cost = hours * (s.v * CONFIG.vanPerHour + s.c * CONFIG.moverPerHour) + miles * 2 * CONFIG.mileRate * s.v;
   cost = Math.max(CONFIG.minCharge, cost);
   cost *= 1 - ((CONFIG.sizeDiscount || {})[key] || 0);
-  const lo = Math.round(cost * (1 - CONFIG.range) / 10) * 10;
+  const lo = Math.round(cost * (1 - (CONFIG.rangeLo != null ? CONFIG.rangeLo : CONFIG.range)) / 10) * 10;
   const hi = Math.round(cost * (1 + CONFIG.range) / 10) * 10;
   const van = s.v + (s.v > 1 ? " vans" : " van");
   const dur = Math.round((hours + miles * 2 / CONFIG.mph) * 2) / 2;
