@@ -12,6 +12,7 @@
 <link rel="preload" as="image" href="images/photo-1.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=optional" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=optional"></noscript>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,800&display=swap">
 <style>
 :root{--bg:#EEF1F4;--card:#fff;--ink:#14202B;--mute:#5A6773;--line:#D3DAE0;--kraft:#1F4FB5;--kraft-d:#1B45A0;--ok:#2F7D5B;--tape:#E8453C;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -569,6 +570,52 @@ html.nophone .fc-cbw{display:flex;flex-direction:column;align-items:flex-end;gap
 .cb5-go{flex:none;font-size:20px;color:#4ADE80;font-weight:800}
 
 .cb5{margin-top:14px}
+
+/* ---- Google reviews strip ---- */
+.cta{min-height:52px;padding:13px 18px;font-size:17.5px;border-radius:14px}
+.cta svg{width:20px;height:20px}
+@media (min-width:900px){.cta{min-height:58px;font-size:18.5px}}
+.cb5{position:relative;border-color:rgba(74,222,128,.6);background:linear-gradient(135deg,rgba(34,163,90,.3),rgba(34,163,90,.1))}
+.cb5-ic::before{content:"";position:absolute;inset:0;border-radius:50%;background:#22A35A;z-index:-1;animation:cbRing 2.2s ease-out infinite}
+.cb5-ic{isolation:isolate}
+@keyframes cbRing{0%{transform:scale(1);opacity:.55}70%,100%{transform:scale(1.55);opacity:0}}
+.cb5-go{animation:cbNudge 1.6s ease-in-out infinite}
+@keyframes cbNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.cb5-ic::before,.cb5-go{animation:none}}
+.trustln{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;margin:10px 0 16px;font-size:13.5px;font-weight:600;color:var(--mute)}
+.trustln span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.trustln svg{width:15px;height:15px;fill:#4ADE80;flex:none}
+h1.hx{font-size:clamp(26px,7.4vw,34px);line-height:1.1;margin:4px 0 14px;text-wrap:balance}
+@media (min-width:720px){h1.hx{font-size:42px;margin:8px 0 18px;text-wrap:wrap}}
+h1.hx{font-family:"Archivo","Bricolage Grotesque",system-ui,sans-serif;font-stretch:112%;font-weight:800;letter-spacing:-.025em}
+h1.hx .hx-b{color:inherit;position:relative}
+h1.hx .hx-b::after{content:"";position:absolute;left:0;right:.12em;bottom:-.13em;height:.13em;border-radius:99px;background:linear-gradient(90deg,#4F82F5 0%,#4F82F5 38%,#EF4A41 62%,#EF4A41 100%);transform-origin:left;animation:hxMark .9s cubic-bezier(.22,1,.36,1) .35s both}
+@keyframes hxMark{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+h1.hx.fit{padding-bottom:.08em}
+@media (prefers-reduced-motion:reduce){h1.hx .hx-b::after{animation:none}}
+h1.hx.fit{line-height:1.12;margin-bottom:16px}
+h1.hx.fit .hx-a,h1.hx.fit .hx-b{display:inline-block;white-space:nowrap;vertical-align:top}
+h1.hx.fit:not(.one) .hx-a,h1.hx.fit:not(.one) .hx-b{display:block;width:max-content}
+h1.hx.fit:not(.one) .hx-b{margin-top:2px}
+h1.hx.one{white-space:nowrap;word-spacing:-.3em}h1.hx.one .hx-a{margin-right:.28em}h1.hx.one .hx-a,h1.hx.one .hx-b{word-spacing:normal}
+.grs{display:flex;flex-direction:column;gap:8px;padding:11px 13px 12px;margin:0 0 6px;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none;-webkit-tap-highlight-color:transparent;transition:border-color .2s,transform .15s}
+.grs:hover{border-color:rgba(251,188,4,.55)}
+.grs:active{transform:scale(.99)}
+.grs-top{display:flex;align-items:center;gap:7px;min-width:0}
+.grs-g{width:19px;height:19px;flex:none}
+.grs-top b{font-size:16px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.grs-st{display:flex;gap:1px;flex:none}
+.grs-st svg{width:14px;height:14px;fill:#FBBC04}
+.grs-lbl{font-size:13px;font-weight:600;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.grs-go{margin-left:auto;flex:none;display:flex;align-items:center;gap:4px;font-size:12.5px;font-weight:700;color:#FBBC04}
+.grs-go svg{width:12px;height:12px;fill:#FBBC04}
+.grs-qs{display:grid}
+.grs-q{grid-area:1/1;font-size:15.5px;line-height:1.4;font-weight:500;opacity:0;transform:translateY(4px);transition:opacity .5s,transform .5s;text-wrap:pretty}
+.grs-q.on{opacity:1;transform:none}
+.grs-q em{font-style:normal;font-weight:600;font-size:13.5px;color:var(--mute);white-space:nowrap}
+@media (max-width:360px){.grs-lbl{display:none}}
+@media (min-width:720px){.grs{flex-direction:row;align-items:center;gap:16px;padding:13px 16px}.grs-top{flex:none;gap:8px;padding-right:16px;border-right:1px solid var(--line);align-self:stretch}.grs-top b{font-size:18px}.grs-st svg{width:15px;height:15px}.grs-qs{flex:1;min-width:0}.grs-q{font-size:16.5px}.grs-go{margin-left:6px}}
+@media (prefers-reduced-motion:reduce){.grs-q{transition:none}}
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -588,18 +635,21 @@ html.nophone .fc-cbw{display:flex;flex-direction:column;align-items:flex-end;gap
   <a class="btn call" href="tel:07360360790" data-track><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg>Call</a>
   <a class="btn wa" href="https://wa.me/447360360790" target="_blank" rel="noopener" data-wa><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.8 2.1 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.1z"/></svg>WhatsApp</a>
 </div>
-<h1>Get an unbeatable price in a few seconds.</h1>
-<p class="sub">Found it cheaper? We'll beat it. Call now for an instant no obligation quote.</p>
+<h1 class="hx" id="hx"><span class="hx-a">Found a cheaper quote?</span> <span class="hx-b">We'll beat it.</span></h1>
+<script>(function(){var h=document.getElementById("hx");if(!h)return;var a=h.querySelector(".hx-a"),b=h.querySelector(".hx-b");
+function fit(){var W=h.clientWidth;if(!W)return;h.classList.add("fit");a.style.fontSize=b.style.fontSize="100px";
+if(innerWidth>=720){h.classList.add("one");var f=Math.min(100*W/(a.offsetWidth+b.offsetWidth+28),40);a.style.fontSize=b.style.fontSize=f.toFixed(2)+"px";var t=a.getBoundingClientRect().width+b.getBoundingClientRect().width+parseFloat(getComputedStyle(a).marginRight);f=Math.min(f*W/t,40)-.1;a.style.fontSize=b.style.fontSize=f.toFixed(2)+"px";}
+else{h.classList.remove("one");var fa=100*W/a.offsetWidth,fb=100*W/b.offsetWidth;fa=Math.min(fa,34);fb=fa;a.style.fontSize=fa.toFixed(2)+"px";b.style.fontSize=fb.toFixed(2)+"px";
+fa=Math.min(fa*W/a.offsetWidth,34);fb=fa;a.style.fontSize=(fa-.1).toFixed(2)+"px";b.style.fontSize=(fb-.1).toFixed(2)+"px";}}
+fit();addEventListener("resize",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);addEventListener("load",fit);})();</script>
 <a class="cta" href="#quote" id="ctaBtn">Get my instant price<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 5.2l-1.4 1.4 4.4 4.4H4v2h12.2l-4.4 4.4 1.4 1.4L20 12z"/></svg></a>
-<button class="cb5" id="cb5" type="button"><span class="cb5-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg></span><span class="cb5-t"><b>We'll call you back in 5 mins</b><small>Leave your name and number. No obligation.</small></span><span class="cb5-go" aria-hidden="true">→</span></button>
-<div class="trust-row">
-  <a class="rate" id="rate" href="#reviews"><svg class="gl" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span class="rate-star" aria-hidden="true">★★★★★</span><span id="rateTxt">See why customers love us</span><span class="rate-go" aria-hidden="true">→</span></a>
-  <a class="tpill" href="#insured"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--ok)"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1.2 13.2l5.4-5.4-1.4-1.4-4 4-1.8-1.8-1.4 1.4 3.2 3.2z"/></svg>Fully insured</a>
-  <a class="tpill" href="#pricematch"><svg viewBox="0 0 24 24" aria-hidden="true" style="fill:var(--kraft-d)"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.2 14.6L6.6 12.4l1.4-1.4 2.8 2.8 5.6-5.6 1.4 1.4-7 7z"/></svg>Price-match guarantee</a>
-</div>
-<div class="reach">
-  <a href="mailto:info@big-moves.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4.2l-8 5-8-5V6l8 5 8-5v2.2z"/></svg>info@big-moves.com</a>
-</div>
+<button class="cb5" id="cb5" type="button"><span class="cb5-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg></span><span class="cb5-t"><b>We'll call you back in 5 mins</b></span><span class="cb5-go" aria-hidden="true">→</span></button>
+<a class="grs" id="grs" href="https://www.google.com/maps/place/Big+Moves+Removals/@53.4516583,-4.3839004,8z/data=!4m12!1m2!2m1!1sbig+moves!3m8!1s0x487bada3ead9c0b7:0x8acc0237482ccb0b!8m2!3d53.4516583!4d-2.2745254!9m1!1b1!15sCgliaWcgbW92ZXNaCyIJYmlnIG1vdmVzkgEObW92aW5nX2NvbXBhbnmaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjA1YkdReU1USmxSMUpMVG01V00xSkZSbkJPYkRrMVkycGFSMU14UlJBQuABAPoBBAgAEDk!16s%2Fg%2F11yw4f5nhl?entry=ttu&g_ep=EgoyMDI2MTEwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="Rated 5.0 on Google. Read our Google reviews">
+  <span class="grs-top"><svg class="grs-g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><b>5.0</b><span class="grs-st" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 17.3l6.2 3.7-1.6-7 5.4-4.7-7.1-.6L12 2 9.1 8.7 2 9.3l5.4 4.7-1.6 7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.3l6.2 3.7-1.6-7 5.4-4.7-7.1-.6L12 2 9.1 8.7 2 9.3l5.4 4.7-1.6 7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.3l6.2 3.7-1.6-7 5.4-4.7-7.1-.6L12 2 9.1 8.7 2 9.3l5.4 4.7-1.6 7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.3l6.2 3.7-1.6-7 5.4-4.7-7.1-.6L12 2 9.1 8.7 2 9.3l5.4 4.7-1.6 7z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.3l6.2 3.7-1.6-7 5.4-4.7-7.1-.6L12 2 9.1 8.7 2 9.3l5.4 4.7-1.6 7z"/></svg></span><span class="grs-lbl">Google reviews</span><span class="grs-go" aria-hidden="true">Read all<svg viewBox="0 0 24 24"><path d="M14 3h7v7h-2V6.4l-9.3 9.3-1.4-1.4L17.6 5H14V3zM5 5h6v2H5v12h12v-6h2v6a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"/></svg></span></span>
+  <span class="grs-qs" aria-hidden="true"><span class="grs-q on">&ldquo;Absolutely brilliant service from start to finish!&rdquo; <em>Martyn I.</em></span><span class="grs-q">&ldquo;Brilliant service, highly recommend! We've moved twice with Baz now…&rdquo; <em>Jonny O.</em></span><span class="grs-q">&ldquo;…moved the lot on a tight timeframe and did a professional job!&rdquo; <em>Alex W.</em></span><span class="grs-q">&ldquo;Fantastic service and very friendly! Went the extra mile for me cheers lads&rdquo; <em>Adam F.</em></span><span class="grs-q">&ldquo;…it was stress free and very efficient, I'd recommend them to anyone&rdquo; <em>Violet M.</em></span></span>
+</a>
+<script>(function(){var q=document.querySelectorAll("#grs .grs-q"),i=0;if(q.length<2)return;setInterval(function(){q[i].classList.remove("on");i=(i+1)%q.length;q[i].classList.add("on");},4500);})();</script>
+<p class="trustln"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 16.2L5.3 12l-1.4 1.4 5.6 5.6 11-11-1.4-1.4z"/></svg>Fully insured</span><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 16.2L5.3 12l-1.4 1.4 5.6 5.6 11-11-1.4-1.4z"/></svg>Price-match guarantee</span></p>
 <div class="thx-back" id="thxBack" role="dialog" aria-modal="true" aria-labelledby="thxT"><div class="thx"><div class="thx-tick"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h3 id="thxT">Thank you!</h3><p>Your quote request is in. We'll be in touch shortly to confirm your price.</p><button type="button" id="thxClose">Done</button></div></div>
 
 <div id="gallery"><div class="slider" id="slider"><div class="frame"><div class="track" id="track" tabindex="0" aria-label="Photos of our work">
@@ -1140,10 +1190,10 @@ const OUT = "AB10,57.135,-2.117;AB11,57.139,-2.091;AB12,57.101,-2.111;AB13,57.10
     box.style.position="relative";
     var tip=document.createElement("div");tip.className="starthere";tip.setAttribute("role","status");tip.textContent="Start here";box.appendChild(tip);
     var tt,used=false;
-    function show(){if(used)return;clearTimeout(tt);tip.classList.remove("on");void tip.offsetWidth;tip.classList.add("on");tt=setTimeout(function(){tip.classList.remove("on");},3200);}
+    function show(){if(used)return;clearTimeout(tt);tip.classList.remove("on");void tip.offsetWidth;tip.classList.add("on");tt=setTimeout(function(){tip.classList.remove("on");},4000);}
     ["focus","change","click"].forEach(function(ev){size.addEventListener(ev,function(){used=true;clearTimeout(tt);tip.classList.remove("on");});});
     var cta=$("ctaBtn");if(cta)cta.addEventListener("click",function(){setTimeout(show,750);});
-    if("IntersectionObserver" in window){var seen=false,io=new IntersectionObserver(function(es){if(es[0].isIntersecting&&!seen){seen=true;setTimeout(show,250);io.disconnect();}},{threshold:1,rootMargin:"0px 0px -25% 0px"});io.observe(size);}
+    if("IntersectionObserver" in window){var inV=false,io=new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!inV)setTimeout(show,200);inV=v;if(used)io.disconnect();},{threshold:.6,rootMargin:"0px 0px -10% 0px"});io.observe(size);}
   }
   /* --- "Found it cheaper?" opens the details sheet --- */
   var beat=document.querySelector(".quote .beat"),sheet=$("sheet"),T=$("shT");
