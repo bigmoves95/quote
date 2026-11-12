@@ -630,7 +630,8 @@ h1.hx .hx-b::after{content:"";position:absolute;left:0;right:.12em;bottom:-.13em
 @keyframes hxMark{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 h1.hx.fit{padding-bottom:.08em}
 @media (prefers-reduced-motion:reduce){h1.hx .hx-b::after{animation:none}}
-h1.hx.fit{line-height:1.12;margin-bottom:16px}
+h1.hx.fit{line-height:1.12;margin-bottom:12px}
+h1.hx.fit.one{line-height:1.02;margin-bottom:2px}
 h1.hx.fit .hx-a,h1.hx.fit .hx-b{display:inline-block;white-space:nowrap;vertical-align:top}
 h1.hx.fit:not(.one) .hx-a,h1.hx.fit:not(.one) .hx-b{display:block;width:max-content}
 h1.hx.fit:not(.one) .hx-b{margin-top:2px}
@@ -858,6 +859,9 @@ const CONFIG = {
   formUrl: "https://formspree.io/f/xppqkege",
   adsId: "AW-18517523574",
   adsConversion: "AW-18517523574/tENnCJaUsK4dEPb46_1E",
+  formConversion: "AW-18517523574/sXkrCIC5h7cdEPb46_1E",   // "Quote form sent": forms only
+  waConversion: "AW-18517523574/07i4CP6NiLcdEPb46_1E",     // "Whatsapp": WhatsApp taps only (Secondary)
+  callConversion: "AW-18517523574/Y10ICJXmh7cdEPb46_1E",   // "Website calls 20s+": Google forwarding number
   roadFactor: 1.3,                  // straight-line miles x this = road miles
   vanPerHour: 48,                   // £ per van per hour
   moverPerHour: 26,                 // £ per mover per hour
@@ -886,6 +890,19 @@ let current = {}, distMode = "mi", pcMiles = null;
    The tag loads straight after the page has finished loading (or on first tap/scroll, whichever is first) so it never blocks the first paint. ---- */
 window.dataLayer = window.dataLayer || []; window.gtag = function(){ dataLayer.push(arguments); };
 gtag("js", new Date()); gtag("config", CONFIG.adsId);
+/* Website calls 20s+: visitors from an ad see a Google forwarding number that rings 07360 360790 */
+function swapNumber(formatted, mobile){
+  if (!formatted) return;
+  const go = () => {
+    const tel = "tel:" + String(mobile || formatted).replace(/[^\d+]/g, "");
+    document.querySelectorAll('a[href^="tel:"]').forEach(a => { a.href = tel; if (a.getAttribute("aria-label")) a.setAttribute("aria-label", a.getAttribute("aria-label").split("07360 360790").join(formatted)); });
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n;
+    while ((n = w.nextNode())) if (n.nodeValue.indexOf("07360 360790") > -1) n.nodeValue = n.nodeValue.split("07360 360790").join(formatted);
+    CONFIG.phone = formatted;
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else go();
+}
+if (CONFIG.callConversion) gtag("config", CONFIG.callConversion, {phone_conversion_number: "07360360790", phone_conversion_callback: swapNumber});
 (function(){
   let done = false;
   const load = () => { if (done) return; done = true; const sc = document.createElement("script"); sc.async = true; sc.src = "https://www.googletagmanager.com/gtag/js?id=" + CONFIG.adsId; document.head.append(sc); };
@@ -893,6 +910,8 @@ gtag("js", new Date()); gtag("config", CONFIG.adsId);
   if (document.readyState === "complete") load(); else addEventListener("load", load);
 })();
 function track(){ if (CONFIG.adsConversion) gtag("event", "conversion", {send_to: CONFIG.adsConversion}); }
+function trackForm(){ if (CONFIG.formConversion) gtag("event", "conversion", {send_to: CONFIG.formConversion}); }
+function trackWa(){ if (CONFIG.waConversion) gtag("event", "conversion", {send_to: CONFIG.waConversion}); }
 document.querySelectorAll("[data-track]").forEach(a => a.addEventListener("click", track));
 
 /* ---- quote ---- */
@@ -957,7 +976,7 @@ function quoteLines(){
 }
 /* WhatsApp opens with a plain message. Move details are only sent with the Submit form. */
 const WA_URL = "https://wa.me/" + intl + "?text=" + encodeURIComponent("Hi " + CONFIG.business + ", I'd like a quote for a move please.");
-document.querySelectorAll("[data-wa]").forEach(a => { a.href = WA_URL; a.addEventListener("click", track); });
+document.querySelectorAll("[data-wa]").forEach(a => { a.href = WA_URL; a.addEventListener("click", track); a.addEventListener("click", trackWa); });
 
 $("size").addEventListener("input", calc);
 $("mvh").addEventListener("input", calc);
@@ -1050,14 +1069,16 @@ $("send").addEventListener("click", async () => {
     const r = await fetch(CONFIG.formUrl, {method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify({name, contact, summary})});
     if (!r.ok) throw 0;
     track();
+    trackForm();
     $("msg").innerHTML = '<span class="done">Request sent. Thank you!</span>';
     showThanks();
   }catch(e){ $("msg").textContent = "Sending failed. Please try again or call us on " + CONFIG.phone + "."; }
   $("send").disabled = false;
 });
-$("waSend").addEventListener("click", () => { track(); window.open(WA_URL, "_blank", "noopener"); });
+$("waSend").addEventListener("click", () => { track(); trackWa(); window.open(WA_URL, "_blank", "noopener"); });
 $("bizWa").href = "https://wa.me/" + intl + "?text=" + encodeURIComponent("Hi " + CONFIG.business + ", I have a commercial move / enquiry.");
 $("bizWa").addEventListener("click", track);
+$("bizWa").addEventListener("click", trackWa);
 calc();
 
 /* ---- "Replies in under 10 mins" label: shown 7am to midnight UK time ---- */
