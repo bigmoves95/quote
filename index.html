@@ -572,6 +572,26 @@ html.nophone .fc-cbw{display:flex;flex-direction:column;align-items:flex-end;gap
 .cb5{margin-top:14px}
 
 /* ---- Google reviews strip ---- */
+.area{margin:0 0 10px;display:flex;flex-direction:column;gap:7px;min-width:0}
+.area-t{margin:0;position:relative;font-size:clamp(12px,3.25vw,15px);white-space:nowrap;line-height:1.35;letter-spacing:-.005em;color:var(--mute);text-wrap:balance}
+.area-t b{color:var(--ink);font-weight:700}
+.towns{position:relative;overflow:hidden;display:flex;align-items:center;height:30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
+.towns-t{display:flex;align-items:center;width:max-content;animation:townsRoll 50s linear infinite;will-change:transform}
+.towns-t span{font-size:12px;line-height:19px;font-weight:600;letter-spacing:.04em;color:var(--ink);opacity:.82;white-space:nowrap}
+.towns-t i{display:block;width:1px;height:11px;margin:0 16px;background:var(--mute);opacity:.45}
+@keyframes townsRoll{to{transform:translateX(-50%)}}
+@media (max-width:359px){.area-t{white-space:normal}}
+/* keep the first screen as it was: tighten spacing slightly */
+.brand{margin-bottom:12px}
+.topbtns{margin-bottom:12px}
+.topbtns .btn{height:44px}
+h1.hx.fit{margin-top:0;margin-bottom:12px}
+.cta{min-height:48px;padding-top:11px;padding-bottom:11px}
+.cb5{margin:10px 0 12px;padding:9px 14px}
+.grs{padding:9px 13px 10px;gap:6px}
+.grs-q{font-size:14.5px}
+.trustln{margin:8px 0 12px}
+@media (prefers-reduced-motion:reduce){.towns-t{animation:none}}
 .lock{margin:14px 0 0;padding:13px;border-radius:14px;background:rgba(6,18,64,.38);border:1px solid rgba(255,255,255,.16);color:#fff}
 .lock[hidden]{display:none}
 .lk-t{display:flex;gap:11px;align-items:flex-start}
@@ -652,7 +672,11 @@ h1.hx.one{white-space:nowrap;word-spacing:-.3em}h1.hx.one .hx-a{margin-right:.28
   <a class="btn call" href="tel:07360360790" data-track><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1z"/></svg>Call</a>
   <a class="btn wa" href="https://wa.me/447360360790" target="_blank" rel="noopener" data-wa><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.8 2.1 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.1.1.6-.1 1.1z"/></svg>WhatsApp</a>
 </div>
-<h1 class="hx" id="hx"><span class="hx-a">Found a cheaper quote?</span> <span class="hx-b">We'll beat it.</span></h1>
+<div class="area">
+  <p class="area-t"><b>Greater Manchester Removals</b> <span>covering the North West</span></p>
+  <div class="towns" role="img" aria-label="Areas we cover: Bolton, Manchester, Salford, Bury, Wigan, Leigh, Rochdale, Oldham, Stockport, Trafford, Altrincham, Warrington, Preston, Chorley, Blackburn, Liverpool, Horwich, Farnworth, Westhoughton, Radcliffe"><div class="towns-t" aria-hidden="true"><span>Bolton</span><i></i><span>Manchester</span><i></i><span>Salford</span><i></i><span>Bury</span><i></i><span>Wigan</span><i></i><span>Leigh</span><i></i><span>Rochdale</span><i></i><span>Oldham</span><i></i><span>Stockport</span><i></i><span>Trafford</span><i></i><span>Altrincham</span><i></i><span>Warrington</span><i></i><span>Preston</span><i></i><span>Chorley</span><i></i><span>Blackburn</span><i></i><span>Liverpool</span><i></i><span>Horwich</span><i></i><span>Farnworth</span><i></i><span>Westhoughton</span><i></i><span>Radcliffe</span><i></i><span>Bolton</span><i></i><span>Manchester</span><i></i><span>Salford</span><i></i><span>Bury</span><i></i><span>Wigan</span><i></i><span>Leigh</span><i></i><span>Rochdale</span><i></i><span>Oldham</span><i></i><span>Stockport</span><i></i><span>Trafford</span><i></i><span>Altrincham</span><i></i><span>Warrington</span><i></i><span>Preston</span><i></i><span>Chorley</span><i></i><span>Blackburn</span><i></i><span>Liverpool</span><i></i><span>Horwich</span><i></i><span>Farnworth</span><i></i><span>Westhoughton</span><i></i><span>Radcliffe</span><i></i></div></div>
+</div>
+<h1 class="hx" id="hx"><span class="hx-a">Comparing removals quotes?</span> <span class="hx-b">We'll beat them.</span></h1>
 <script>(function(){var h=document.getElementById("hx");if(!h)return;var a=h.querySelector(".hx-a"),b=h.querySelector(".hx-b");
 function fit(){var W=h.clientWidth;if(!W)return;h.classList.add("fit");a.style.fontSize=b.style.fontSize="100px";
 if(innerWidth>=720){h.classList.add("one");var f=Math.min(100*W/(a.offsetWidth+b.offsetWidth+28),40);a.style.fontSize=b.style.fontSize=f.toFixed(2)+"px";var t=a.getBoundingClientRect().width+b.getBoundingClientRect().width+parseFloat(getComputedStyle(a).marginRight);f=Math.min(f*W/t,40)-.1;a.style.fontSize=b.style.fontSize=f.toFixed(2)+"px";}
