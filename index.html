@@ -678,7 +678,7 @@ h1.hx.one{white-space:nowrap;word-spacing:-.3em}h1.hx.one .hx-a{margin-right:.28
   <div class="towns" role="img" aria-label="Areas we cover: Bolton, Manchester, Salford, Bury, Wigan, Leigh, Rochdale, Oldham, Stockport, Trafford, Altrincham, Warrington, Preston, Chorley, Blackburn, Liverpool, Horwich, Farnworth, Westhoughton, Radcliffe"><div class="towns-t" aria-hidden="true"><span>Bolton</span><i></i><span>Manchester</span><i></i><span>Salford</span><i></i><span>Bury</span><i></i><span>Wigan</span><i></i><span>Leigh</span><i></i><span>Rochdale</span><i></i><span>Oldham</span><i></i><span>Stockport</span><i></i><span>Trafford</span><i></i><span>Altrincham</span><i></i><span>Warrington</span><i></i><span>Preston</span><i></i><span>Chorley</span><i></i><span>Blackburn</span><i></i><span>Liverpool</span><i></i><span>Horwich</span><i></i><span>Farnworth</span><i></i><span>Westhoughton</span><i></i><span>Radcliffe</span><i></i><span>Bolton</span><i></i><span>Manchester</span><i></i><span>Salford</span><i></i><span>Bury</span><i></i><span>Wigan</span><i></i><span>Leigh</span><i></i><span>Rochdale</span><i></i><span>Oldham</span><i></i><span>Stockport</span><i></i><span>Trafford</span><i></i><span>Altrincham</span><i></i><span>Warrington</span><i></i><span>Preston</span><i></i><span>Chorley</span><i></i><span>Blackburn</span><i></i><span>Liverpool</span><i></i><span>Horwich</span><i></i><span>Farnworth</span><i></i><span>Westhoughton</span><i></i><span>Radcliffe</span><i></i></div></div>
 </div>
 <h1 class="hx" id="hx"><span class="hx-a">Comparing removals quotes?</span> <span class="hx-b">We'll beat them.</span></h1>
-<script>(function(){var h=document.getElementById("hx");if(!h)return;var a=h.querySelector(".hx-a"),b=h.querySelector(".hx-b");
+<script>(function(){var h=document.getElementById("hx");if(!h)return;var a=h.querySelector(".hx-a"),b=h.querySelector(".hx-b");if(/[?&]service=manvan(&|$)/.test(location.search)){a.textContent="Need a man and van?";b.textContent="From \u00a360 an hour.";}
 function fit(){var W=h.clientWidth;if(!W)return;h.classList.add("fit");a.style.fontSize=b.style.fontSize="100px";
 if(innerWidth>=720){h.classList.add("one");var f=Math.min(100*W/(a.offsetWidth+b.offsetWidth+28),40);a.style.fontSize=b.style.fontSize=f.toFixed(2)+"px";var t=a.getBoundingClientRect().width+b.getBoundingClientRect().width+parseFloat(getComputedStyle(a).marginRight);f=Math.min(f*W/t,40)-.1;a.style.fontSize=b.style.fontSize=f.toFixed(2)+"px";}
 else{h.classList.remove("one");var fa=100*W/a.offsetWidth,fb=100*W/b.offsetWidth;fa=Math.min(fa,34);fb=fa;a.style.fontSize=fa.toFixed(2)+"px";b.style.fontSize=fb.toFixed(2)+"px";
@@ -1079,6 +1079,7 @@ $("waSend").addEventListener("click", () => { track(); trackWa(); window.open(WA
 $("bizWa").href = "https://wa.me/" + intl + "?text=" + encodeURIComponent("Hi " + CONFIG.business + ", I have a commercial move / enquiry.");
 $("bizWa").addEventListener("click", track);
 $("bizWa").addEventListener("click", trackWa);
+if (/[?&]service=manvan(&|$)/.test(location.search)) { const mv = document.querySelector('#seg input[value="mv"]'); if (mv) mv.click(); }
 calc();
 
 /* ---- "Replies in under 10 mins" label: shown 7am to midnight UK time ---- */
